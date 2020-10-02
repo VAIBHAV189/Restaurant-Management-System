@@ -1,0 +1,140 @@
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+    background-image: url('../images/login+signup2.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 500;
+}
+
+.container{
+    height: 100%;
+    align-content: center;
+    z-index: 10;
+}
+
+.card{
+height: 350px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: rgb(51, 113, 138) !important;
+border-radius: 1em;
+}
+.card1{
+height: 380px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color:  rgb(51, 113, 138) !important;
+border-radius: 1em;
+}
+
+.social_icon span{
+font-size: 70px;
+margin-left: 10px;
+color: #FFC312;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: rgb(250, 248, 248);
+font-weight: bold;
+text-shadow: black 2px 2px;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.card-body {
+height: 80%;
+background-image: linear-gradient(to right, rgb(4, 164, 175) , rgb(245, 239, 238)) !important;
+border-radius: 1em;
+}
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+
+width: 50px;
+background-color: #9bee93;
+color: black;
+border:0 !important;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;;
+
+}
+
+.login_btn{
+position: absolute;
+top:80%;
+left:70%;
+color: rgb(246, 247, 241);
+background-color: #024397;
+font-weight: 300;
+border-radius: 2em;
+font-size: 1.1em;
+text-shadow: black 2px 2px;
+width: 100px;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.login_btn :hover{
+color: rgb(240, 232, 232);
+background-color: rgb(12, 15, 177);
+}
+
+.signUp{
+    color: rgb(246, 247, 241);
+    background-color: #024397;
+    font-weight: 300;
+    border-radius: 2em;
+    font-size: 1.1em;
+    text-shadow: black 2px 2px;
+    width: 100px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.signUp:hover{
+    background-color: rgb(12, 15, 177);
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
+
+#cst{
+    padding-left: 30%;
+    font-family: 'Dancing Script', cursive;
+}
