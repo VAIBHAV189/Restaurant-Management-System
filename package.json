@@ -1,23 +1,21 @@
 {
-  "name": "vaibhav-se",
+  "name": "check12",
   "version": "1.0.0",
-  "description": "",
-  "main": "db.js",
+  "description": "Check_12",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Achi",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "hbs": "^4.1.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "routes": "^2.1.0",
     "sequelize": "^6.3.5",
     "sqlite3": "^5.0.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }

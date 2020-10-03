@@ -1,59 +1,45 @@
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
-const Customer = require('./db').Customer
+const passport = require('passport');
+const strategy = require('passport-local').Strategy;
+const customers = require('./db').customersDB;
+const JUSTTrying = require('./db2')                   //Idhar dekhiyo
 
-// console.log(passport)
-
-
-passport.serializeUser(
-    function(Customer,done) {
-        done(null,Customer.Username) 
-    }
-)
-
-
-passport.deserializeUser(
-    function(Username,done){
-        Customer.findByPk(Username)
-        .then((user)=>{
-            done(null,user) 
-        })
-        .catch(done)
-    }
-)
-
-// passport.use(new localStrategy(
-//     function(Username,Password,done){
-//         console.log("Username is: ", Username, "\nPassword is: ",Password)
-//         Customer.findOne({
-//             where:{Username:Username} 
-//         })
-//         .then((user)=>{
-//             if(!user){
-//                 console.log("User Not Found")
-//                 return done(null,false) 
-//             }
-//             if(user.Password != Password){
-//                 console.log("Password doesn't match")
-//                 return done(null,false) 
-//             }
-//             done(null,user) 
-//         })
-//         .catch(done)
-//     }
-// ))
-
-passport.use(new LocalStrategy(
-    function(Username, Password, done) {
-        console.log('dfghj')
-      User.findOne({ Username: Username }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        if (!user.verifyPassword(Password)) { return done(null, false); }
-        return done(null, user);
-      });
+passport.use(new strategy(
+    function(username,password,done){
+        customers.findOne({
+            where : {
+                username : username
+            }
+        }).then((user)=>{
+            if(!user){
+                console.log('No such user found in database');
+                return done(null,false,{message : 'Incorrect UserName'});
+            }
+            if(user.password != password){
+                console.log("Entered Password : " + password);
+                console.log("User Password in Database : " + user.password);
+                console.log('MisMatch!\nTry Again!!');
+                return done(null,false,{message : 'Incorrect Password'});
+            }
+            return done(null,user);
+        }).catch(done)
     }
 ));
 
-module.exports = passport
+passport.serializeUser(function(user,done){
+    done(null,user.username);
+});
 
+passport.deserializeUser(function(username,done){
+    customers.findOne({
+         where : { username : username }
+    }).then((user)=>{
+        if(!user){
+            return done(new Error('No Such User'));
+        }
+       return done(null,user);
+    }).catch((err)=>{
+        done(err);
+    });
+});
+
+module.exports = passport;
