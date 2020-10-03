@@ -82,6 +82,8 @@ server.get("/*",(req,res)=>{
 
 // -----------------------------------------------Root Authentication ended ----------------------------------------------------------------------- //
 
+//Setting View Engine as HBS
+server.set("view engine","hbs")
 
 server.listen(7891,()=>{
     console.log('Server started at http://localhost:7891/');
