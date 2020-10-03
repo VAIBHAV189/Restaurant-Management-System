@@ -5,7 +5,7 @@ const db = new Sequelize({
     storage : __dirname + '/storage_customers.db'
 });
 
-const customersDB = db.define('users',{
+const customer = db.define('customer',{
     username : {
         type : Sequelize.STRING,
         allowNull : false,
@@ -15,17 +15,16 @@ const customersDB = db.define('users',{
         type : Sequelize.STRING,
         allowNull : false
     },
-    Name : {
+    name : {
         type : Sequelize.STRING,
         allowNull : false,
-        unique: false
     },
-    Email:{
+    email:{
         type:Sequelize.STRING,
         allowNull:false,
         unique:true
     },
-    Current_Cart_Items : {
+    currentCartItems : {
         type : Sequelize.JSON,
         allowNull : true,
         unique : false
@@ -37,5 +36,5 @@ db.sync().then(()=>{
 })
 
 module.exports = {
-    customersDB
+    customer
 }

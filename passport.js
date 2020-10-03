@@ -1,7 +1,6 @@
 const passport = require('passport');
 const strategy = require('passport-local').Strategy;
-const customers = require('./db').customersDB;
-const JUSTTrying = require('./db2')                   //Idhar dekhiyo
+const customers = require('./db').customer;
 
 passport.use(new strategy(
     function(username,password,done){

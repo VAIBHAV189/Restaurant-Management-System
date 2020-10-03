@@ -5,34 +5,34 @@ const db = new Sequelize({
     storage: __dirname + '/storage.db'
 })
 
-const Employee_Table = db.define('Employee_Table',{
-    Job_Title : {
+const employeeTable = db.define('Employee_Table',{
+    jobTitle : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : false
     },
-    Name : {
+    name : {
         type : Sequelize.STRING,
         allowNull : false,
         unique: false
     },
-    Emp_Id : {
+    empId : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : true,
         primaryKey: true
     },
-    Phone_Number : {
+    phoneNumber : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : false
     },
-    Res_Add : {
+    resAdd : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : false
     },
-    Password : {
+    password : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : false
@@ -40,151 +40,151 @@ const Employee_Table = db.define('Employee_Table',{
 });
 
 
-const Employee_Attendance = db.define('Employee_Attendance',{
-    Emp_Id : {
+const employeeAttendance = db.define('Employee_Attendance',{
+    empId : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : false,
         primaryKey: true
     },
-    Entry_Date : {
+    entryDate : {
         type : Sequelize.STRING,
         allowNull : false,
         unique: false,
         primaryKey: true
     },
-    Entry_Time : {
+    entryTime : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : true
     },
-    Exit_Time : {
+    exitTime : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : false
     }
 });
 
-const Salary_Employee = db.define('Salary_Employee',{
-    Job_Title : {
+const salaryEmployee = db.define('Salary_Employee',{
+    jobTitle : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : true,
         primaryKey: true
     },
-    Salary_Pm : {
+    salaryPm : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique: false
     },
-    Monthly_Hours : {
+    monthlyHours : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : true
     }
 }); 
 
-const Menu = db.define('Menu',{
-    Item_Id : {
+const menu = db.define('Menu',{
+    itemId : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : false,
         primaryKey: true
     },
-    Item_Name : {
+    itemName : {
         type : Sequelize.STRING,
         allowNull : false,
         unique: false
     },
-    Item_Type:{
+    itemType:{
         type: Sequelize.STRING,
         allowNull:false,
         unique:false
     },
-    Item_Price : {
+    itemPrice : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : true
     }
 });
 
-const Order = db.define('Order',{
-    Order_Id : {
+const order = db.define('Order',{
+    orderId : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : false,
         primaryKey: true,
     },
-    Username : {
+    username : {
         type : Sequelize.STRING,
         allowNull : false,
         unique: false
     },
-    Payment_Amount : {
+    paymentAmount : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : true
     },
-    Order_Data : {
+    orderData : {
         type : Sequelize.JSON,
         allowNull : false,
         unique : false
     }
 });
 
-const Reservation_Info = db.define('Reservation_Info',{
-    Table_Id : {
+const reservationInfo = db.define('Reservation_Info',{
+    tableId : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : false,
         primaryKey: true
     },
-    Username : {
+    username : {
         type : Sequelize.STRING,
         allowNull : false,
         unique: false,
         primaryKey: true
     },
-    Start_Time : {
+    startTime : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : false,
         primaryKey: true
     },
-    End_Time : {
+    endTime : {
         type : Sequelize.STRING,
         allowNull : false,
         unique : false,
     },
-    Members : {
+    members : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : false
     }
 });
 
-const Payment_Info = db.define('Payment_Info',{
-    Payment_Id : {
+const paymentInfo = db.define('Payment_Info',{
+    paymentId : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : true
     },
-    Order_Id : {
+    orderId : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique: true
     },
-    Payment_Date : {
+    paymentDate : {
         type : Sequelize.JSON,
         allowNull : false,
         unique : false
     },
-    Payment_Amount : {
+    paymentAmount : {
         type : Sequelize.INTEGER,
         allowNull : false,
         unique : false
     },
-    Order_Data : {
+    orderData : {
         type : Sequelize.JSON,
         allowNull : false,
         unique : false
@@ -199,11 +199,11 @@ db.sync().then(()=>{
 
 module.exports = {
     db,
-    Employee_Attendance,
-    Employee_Table,
-    Salary_Employee,
-    Order,
-    Menu,
-    Payment_Info,
-    Reservation_Info
+    employeeTable,
+    employeeAttendance,
+    salaryEmployee,
+    order,
+    menu,
+    paymentInfo,
+    reservationInfo
 }
