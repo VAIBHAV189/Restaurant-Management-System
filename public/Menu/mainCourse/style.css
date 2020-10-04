@@ -1,0 +1,46 @@
+/*Styling for nav */
+
+li{
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+nav{
+    height: 60px;
+}
+h1
+{
+    color:rgba(43, 43, 49, 0.986);
+    height: 120px;
+    padding-top: 25px;
+    padding-left: 10px;
+    margin-bottom: 30px;
+    background: url(heading.jpg);
+    background-size: cover;
+    text-align: center;
+    font-weight: 700;
+    font-size:40px;
+    text-decoration: underline;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+.txt
+{
+    font-size:20px;
+}
+.container
+{
+    padding-left:270px;
+}
+
+.content
+{
+    color:rgb(214, 52, 30);
+    font-weight: 400;
+    padding-top: 20px;
+}
+
+.add .cnt{
+    margin-top: 20px;
+}
