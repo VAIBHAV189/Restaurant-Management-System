@@ -16,12 +16,6 @@ const employeeTable = db.define('Employee_Table',{
         allowNull : false,
         unique: false
     },
-    empId : {
-        type : Sequelize.INTEGER,
-        allowNull : false,
-        unique : true,
-        primaryKey: true
-    },
     phoneNumber : {
         type : Sequelize.STRING,
         allowNull : false,
@@ -85,12 +79,6 @@ const salaryEmployee = db.define('Salary_Employee',{
 }); 
 
 const menu = db.define('Menu',{
-    itemId : {
-        type : Sequelize.INTEGER,
-        allowNull : false,
-        unique : false,
-        primaryKey: true
-    },
     itemName : {
         type : Sequelize.STRING,
         allowNull : false,

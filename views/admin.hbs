@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 align="center">Welcome Food Buff Admin</h1> <br> <br>
+    <button align="center">
+        <a href="/admin/addEmployee">Add Employee</a>
+    </button>
+    
+    {{#if employee}}
+        <table align="center">
+            <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Job Title</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Residential Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each employee as |item|}}
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.jobTitle}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.phoneNumber}}</td>
+                        <td>{{item.resAdd}}</td>
+                        <td> <button class="updateEmployee"> Update </button> </td>
+                        <td> <button class="deleteEmployee"> Delete </button> </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}} 
+        <h1>Hire Someone</h1>
+    {{/if}}
+
+
+     <button align="center">
+        <a href="/admin/addJob">Add Jobs</a>
+    </button>
+    
+
+
+    {{#if salary}}
+        <table align="center">
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Salary Per Month</th>
+                    <th>Monthly Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each salary as |item|}}
+                    <tr>
+                        <td>{{item.jobTitle}}</td>
+                        <td>{{item.salaryPm}}</td>
+                        <td>{{item.monthlyHours}}</td>
+                        <td> <button class="updateJob"> Update </button> </td>
+                        <td> <button class="deleteJob"> Delete </button> </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}} 
+        <h1>Add Some Jobs</h1>
+    {{/if}}
+
+   
+    <button>
+        <a href="/admin/addMenu">Add Menu</a>
+    </button>
+
+    {{#if menu}}
+        <table align="center">
+            <thead>
+                <tr>
+                    <th>Item Id</th>
+                    <th>Dish Name</th>
+                    <th>Price</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each menu as |item|}}
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.itemName}}</td>
+                        <td>{{item.itemPrice}}</td>
+                        <td>{{item.itemType}}</td>
+                        <td> <button class="updateMenu"> Update </button> </td>
+                        <td> <button class="deleteMenu"> Delete </button> </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}} 
+        <h1>Add Some Items First</h1>
+    {{/if}}
+    <script src="../scripts/jquery.js"></script>
+    <script src="../scripts/admin.js"></script>
+</body>
+</html>
