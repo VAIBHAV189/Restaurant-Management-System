@@ -5,6 +5,7 @@ const passport = require('./passport');
 
 const root = require('./routes/root.js').route
 const admin = require('./routes/admin').route
+const cart = require('./routes/cart').route
 
 server.use(exp.json());
 server.use(exp.urlencoded({extended:true}));
@@ -27,13 +28,13 @@ server.use(exp.static('public'));
 
 server.use('/root',root)
 server.use('/admin',admin)
-
+server.use('/cart',cart)
 
 // //--------------------------------------------------Error Page----------------------------------------------//
 server.get("/*",(req,res)=>{
     res.render('errorPage')
 })
 
-server.listen(6979,()=>{
-    console.log('Server started at http://localhost:6979');
+server.listen(5400,()=>{
+    console.log('Server started at http://localhost:5400');
 })

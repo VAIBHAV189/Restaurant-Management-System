@@ -1,41 +1,41 @@
-function loginCheck(){
-    return new Promise(function(resolve,reject){
-        console.log("Checking");
-        let flag = true;
-        $.get('/profile',(data)=>{
-            if(data.username!=undefined){
-                flag = true;
-            }
-            else{
-                flag = false;
-            }
-        });
-        setTimeout(function(){
-            if(flag){
-                resolve();
-            }
-            else{
-                reject();
-            }
-        },300)
-    });
-}
+// function loginCheck(){
+//     return new Promise(function(resolve,reject){
+//         console.log("Checking");
+//         let flag = true;
+//         $.get('/profile',(data)=>{
+//             if(data.username!=undefined){
+//                 flag = true;
+//             }
+//             else{
+//                 flag = false;
+//             }
+//         });
+//         setTimeout(function(){
+//             if(flag){
+//                 resolve();
+//             }
+//             else{
+//                 reject();
+//             }
+//         },300)
+//     });
+// }
 
-$(()=>{
-    $("#logout").hide();
-    $.get('/profile',(data)=>{
-        if(data.username!=undefined){
-            console.log("Welcome " + data.username);
-            $('#login123')
-                .text(data.username)
-                .attr("href","#")
-            $("#logout").show();
-        }
-        else{
-            console.log("Please Login");
-        }
-    });
-});
+// $(()=>{
+//     $("#logout").hide();
+//     $.get('/profile',(data)=>{
+//         if(data.username!=undefined){
+//             console.log("Welcome " + data.username);
+//             $('#login123')
+//                 .text(data.username)
+//                 .attr("href","#")
+//             $("#logout").show();
+//         }
+//         else{
+//             console.log("Please Login");
+//         }
+//     });
+// });
 
 $('.cnt').hide();
 
@@ -49,7 +49,7 @@ $('.add').on('click',function(){
     loginCheck().then(function(){
         // console.log("Name = " + obj.name);
         res = true;
-        $.post('/addcart',obj,(data)=>{
+        $.post('/cart/addcart',obj,(data)=>{
             if(data == 'Success'){
                 console.log('Yass!!');
             }
@@ -68,7 +68,7 @@ $('.add').on('click',function(){
         });
     })
     .catch(function(){
-        document.location.href='/login';
+        document.location.href='/root/login';
     });
     $(this).parent().siblings('.cnt').show();
 });
@@ -83,7 +83,7 @@ $('.dec').on('click',function(){
         price : +(($(this).parent()).siblings(".price").children().text()),
         work : 'dec'
     };
-    $.post('/updatecart',obj,(data)=>{
+    $.post('/cart/updatecart',obj,(data)=>{
         if(data == 'Success')
             console.log('Update Successfull');
     });
@@ -104,14 +104,14 @@ $('.inc').on('click',function(){
         price : +(($(this).parent()).siblings(".price").children().text()),
         work : 'inc'
     };
-    $.post('/updatecart',obj,(data)=>{
+    $.post('/cart/updatecart',obj,(data)=>{
         if(data == 'Success')
             console.log('Update Successfull');
     });
 });
 
 $("#logout").on('click',function(){
-    $.get("/logout",(data)=>{
+    $.get("/root/logout",(data)=>{
         console.log(data);
     });
 });

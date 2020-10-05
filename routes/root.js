@@ -42,11 +42,11 @@ route.get('/logout', function(req, res){
 });
 
 // //---------------------------------------------------Check login status---------------------------------------//
-route.get('/Username',(req,res)=>{
+route.get('/username',(req,res)=>{
     let obj = req.user;
     if(req.user != undefined) {   
         obj = {};
-        obj.Username = req.user.username;
+        obj.username = req.user.username;
         obj.login = "true"
     }
     else {
