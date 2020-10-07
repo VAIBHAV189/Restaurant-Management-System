@@ -1,22 +1,52 @@
-$(document).ready(()=>{
+function loginCheck(){
+    return new Promise(function(resolve,reject){
+        
+        $.get('/root/username',(data)=>{
+            console.log(data.username);
+            if(data.username){
+                console.log("Here");
+                $('#login').hide()
+                $('#signUp').hide()
+                $('#user').html("Welcome " + data.username)
+                $('#user').show();
+                $('#logout').show();
+                resolve(data)
+            }
+            reject(err)
+        });
+    });
+}
+//ue 
+//acha mein ada ka wo progress report likhlun> 5 min bas cart view chal jaye _/\_ok
+$(()=>{
+    
+    $('#logout').hide()
+    $('#user').hide()
+
     $.get('/root/username',(data)=>{
-        if(data.login==true){
-            console.log("Welcome " + data.username);
+        console.log(data.username);
+        if(data.username){
+            console.log("Here");
+            $('#login').hide()
+            $('#signUp').hide()
+            $('#user').html("Welcome " + data.username)
+            $('#user').show();
+            $('#logout').show();
+            $('#cart').click();
         }
         else{
-            alert("Please Login");
-            document.location.href='/root/login';
+            alert('Please login');
         }
     });
-    $("#cart")
-         .hide()
-         .click();
-});
-
-function refresh(){
+})
+function refresh(){ 
     let total = 0;
     $('#mycart tr').remove();
+    
+    console.log("Refresh Called")
     $.get('/cart/getcart',(data)=>{
+        console.log('print karake dekhte')
+        console.log(data);
         let i = 1;
         Object.keys(data).forEach((key,index)=>{
             $('#mycart').append(
@@ -27,6 +57,7 @@ function refresh(){
                 )
             )
             i++;
+            console.log(i);
             total+=(data[key][0]*data[key][1]);
         })
         if(total>0)

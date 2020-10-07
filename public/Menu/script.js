@@ -1,25 +1,22 @@
-// function loginCheck(){
-//     return new Promise(function(resolve,reject){
-//         console.log("Checking");
-//         let flag = true;
-//         $.get('/profile',(data)=>{
-//             if(data.username!=undefined){
-//                 flag = true;
-//             }
-//             else{
-//                 flag = false;
-//             }
-//         });
-//         setTimeout(function(){
-//             if(flag){
-//                 resolve();
-//             }
-//             else{
-//                 reject();
-//             }
-//         },300)
-//     });
-// }
+function loginCheck(){
+    return new Promise(function(resolve,reject){
+        
+        $.get('/root/username',(data)=>{
+            console.log(data.username);
+            if(data.username){
+                console.log("Here");
+                $('#login').hide()
+                $('#signUp').hide()
+                $('#user').html("Welcome, " + data.username.toUpperCase())
+                $('#user').show();
+                $('#logout').show();
+                resolve(data)
+            }
+            reject(err)
+        });
+    });
+}
+
 
 // $(()=>{
 //     $("#logout").hide();
@@ -36,18 +33,39 @@
 //         }
 //     });
 // });
+$(()=>{
+
+    $('#logout').hide()
+    $('#user').hide()
+
+    $.get('/root/username',(data)=>{
+        console.log(data.username);
+        if(data.username){
+            console.log("Here");
+            $('#login').hide()
+            $('#signUp').hide()
+            $('#user').html("Welcome " + data.username)
+            $('#user').show();
+            $('#logout').show();
+        }
+        else{
+            alert('Please login');
+        }
+    });
+})
 
 $('.cnt').hide();
 
 $('.add').on('click',function(){
+
     let obj = {
         name : ($(this).parent()).siblings(".name").children().text(),
         price : +(($(this).parent()).siblings(".price").children().text()),
         times : +(($(this).parent()).siblings(".cnt").children('.update').text())
     };
     let res = false;
-    loginCheck().then(function(){
-        // console.log("Name = " + obj.name);
+    loginCheck().then(function(user){
+        console.log("Adding  "+ obj.name + " to " + user.username);
         res = true;
         $.post('/cart/addcart',obj,(data)=>{
             if(data == 'Success'){
@@ -60,7 +78,7 @@ $('.add').on('click',function(){
                     price : obj.price,
                     work : 'inc'
                 }
-                $.post('/updatecart',obj_new,(data)=>{
+                $.post('/cart/updatecart',obj_new,(data)=>{
                     if(data == 'Success')
                         console.log('Update Successfull');
                 })

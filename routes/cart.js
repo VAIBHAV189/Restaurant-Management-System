@@ -1,6 +1,11 @@
 const route=require('express').Router()
 const customer=require('../db').customer
-const sequelize =require('sequelize')
+const passport = require('../passport');
+
+// ------------------------------------------Root Authentication Starts------------------------------------------ //
+
+route.use(passport.initialize());
+route.use(passport.session());
 
 
 //-----------------------------GET REQUEST FOR FETCHING CART-----------------------------
@@ -12,13 +17,15 @@ route.get('/getcart',(req,res)=>{
     }).then((val)=>{
         let v = (val.dataValues);
         let n_order = v.currentCartItems;
+        console.log("Sending the cart items ", n_order)
         res.send(n_order);
     });
 });
 
+
 //-----------------------------POST REQUEST FOR ADDING TO CART-----------------------------
 route.post('/addcart',function(req,res){
-
+    
     let name = req.body.name;
     let price = +(req.body.price);
     let times = +(req.body.times);
@@ -47,8 +54,6 @@ route.post('/addcart',function(req,res){
     });
 });
 
-
-
 //-----------------------------POST REQUEST FOR UPDATING CART-----------------------------
 route.post('/updatecart',function(req,res){
     let name = req.body.name;
@@ -64,7 +69,7 @@ route.post('/updatecart',function(req,res){
         {
             if(item[1]==1)
             {
-                delete n_order[name];
+                delete n_order[name]; 
             }
             else
             {

@@ -19,6 +19,8 @@ passport.use(new strategy(
                 console.log('MisMatch!\nTry Again!!');
                 return done(null,false,{message : 'Incorrect Password'});
             }
+            // let obj={}
+            // obj.username=user.username
             return done(null,user);
         }).catch(done)
     }

@@ -4,6 +4,9 @@ const passport = require('../passport');
 
 // ------------------------------------------Root Authentication Starts------------------------------------------ //
 
+route.use(passport.initialize());
+route.use(passport.session());
+
 route.get('/login',(req,res)=>{
     res.render("login")
 })
@@ -15,8 +18,9 @@ route.post('/login',passport.authenticate('local',{failureRedirect : '/root/logi
     }
 );
 
+
 route.get('/signUp',(req,res)=>{
-    res.render("signUp")
+    res.render("login")
 })
 
 route.post('/signUp',(req,res)=>{
@@ -33,7 +37,6 @@ route.post('/signUp',(req,res)=>{
     })
 })
 
-
 // //----------------------------------------------------Logout Handler-------------------------------------------//
 
 route.get('/logout', function(req, res){
@@ -43,17 +46,11 @@ route.get('/logout', function(req, res){
 
 // //---------------------------------------------------Check login status---------------------------------------//
 route.get('/username',(req,res)=>{
-    let obj = req.user;
-    if(req.user != undefined) {   
-        obj = {};
-        obj.username = req.user.username;
-        obj.login = "true"
-    }
-    else {
-        obj = {};
-        obj.login = "false";
-    }
-    res.send(obj)
+    
+    let obj ={}
+    if(req.user)
+        obj.username=req.user.username 
+    res.send(obj);
 })
 
 // //--------------------------------------------------Error Page----------------------------------------------//
@@ -64,3 +61,4 @@ route.get("/*",(req,res)=>{
 module.exports={
     route
 }
+
