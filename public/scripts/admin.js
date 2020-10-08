@@ -8,6 +8,6 @@ $(()=>{
             phoneNumber: td['3'].innerHTML,
             resAdd: td['4'].innerHTML
         }
-        $.get('/updateEmployee',obj)
+        $.post('/updateEmployee',obj)
     })
 })

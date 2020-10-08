@@ -96,7 +96,7 @@ route.post('/addMenu',
 )
 
 route.post('/updateMenu',
-    async function(req, res) {
+    async function(req, res) { 
         console.log("Going to updateMenu" + req.body)
         const itemUpdated = await menu.update(req.body, {
             where : {

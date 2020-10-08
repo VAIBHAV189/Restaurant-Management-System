@@ -33,7 +33,6 @@ const employeeTable = db.define('Employee_Table',{
     }
 });
 
-
 const employeeAttendance = db.define('Employee_Attendance',{
     empId : {
         type : Sequelize.INTEGER,
