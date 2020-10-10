@@ -4,19 +4,36 @@ const passport = require('../passport');
 
 // ------------------------------------------Root Authentication Starts------------------------------------------ //
 
+route.use(passport.initialize());
+route.use(passport.session());
+
 route.get('/login',(req,res)=>{
     res.render("login")
 })
 
-route.post('/login',passport.authenticate('local',{failureRedirect : '/root/login'})
+route.post('/login/user',passport.authenticate('local-user-login',{
+        failureRedirect : '/root/login'
+    })
     ,function(req,res){
-        console.log("Logging In : " + req.user.username);
-        return res.redirect("/");
+        console.log("Logging In User: ")
+        console.log(req.user)
+        return res.redirect('/')
     }
 );
 
+route.post('/login/employee',passport.authenticate('local-employee-login',{
+        failureRedirect : '/root/login'
+    })
+    ,function(req,res){
+        console.log("Logging In Employee: ")
+        console.log(req.user)
+        if(req.user.jobTitle == 'admin') 
+            return res.redirect('/admin')
+        else return res.redirect('/employee') 
+});
+
 route.get('/signUp',(req,res)=>{
-    res.render("signUp")
+    res.render("signup")
 })
 
 route.post('/signUp',(req,res)=>{
@@ -33,7 +50,6 @@ route.post('/signUp',(req,res)=>{
     })
 })
 
-
 // //----------------------------------------------------Logout Handler-------------------------------------------//
 
 route.get('/logout', function(req, res){
@@ -42,18 +58,12 @@ route.get('/logout', function(req, res){
 });
 
 // //---------------------------------------------------Check login status---------------------------------------//
-route.get('/Username',(req,res)=>{
-    let obj = req.user;
-    if(req.user != undefined) {   
-        obj = {};
-        obj.Username = req.user.username;
-        obj.login = "true"
-    }
-    else {
-        obj = {};
-        obj.login = "false";
-    }
-    res.send(obj)
+route.get('/username',(req,res)=>{
+    
+    let obj ={}
+    if(req.user)
+        obj.username=req.user.username 
+    res.send(obj);
 })
 
 // //--------------------------------------------------Error Page----------------------------------------------//
@@ -61,6 +71,6 @@ route.get("/*",(req,res)=>{
     res.render('errorPage')
 })
 
-module.exports={
+module.exports = {
     route
 }
