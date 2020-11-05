@@ -159,7 +159,7 @@ section.cook-delicious {
 
 
 section.services {
-	padding-top: 50px;
+	padding-top: 40px;
 	background-image: url(../Images/Type\ Of\ Food\ Background.jpg);
 	background-size: cover;
 	background-position: center center;
@@ -167,8 +167,7 @@ section.services {
 }
 
 #service h2 {
-	margin-top: 0px;
-	margin-bottom: 70px;
+
 	font-size: 22px;
 	font-weight: 700;
 	letter-spacing: 0.5px;
@@ -195,10 +194,10 @@ section.services {
 .services .service-item h4 {
 	margin-top: 20px;
 	font-size: 22px;
-	color: #121212;
+	color: #f1ecec;
 	font-family: 'Spectral', serif;
 	font-weight: 600;
-	margin-bottom: 0px;
+	padding-bottom: 5px;
 }
 
 

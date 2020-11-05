@@ -22,6 +22,7 @@ $(()=>{
     
     $('#logout').hide()
     $('#user').hide()
+    $('#cart').hide()
 
     $.get('/root/username',(data)=>{
         console.log(data.username);
@@ -35,9 +36,38 @@ $(()=>{
             $('#cart').click();
         }
         else{
-            alert('Please login');
+            alert("You have not logged in....Redirecting to home page")
+            document.location='/'
         }
+        
     });
+
+    // Get the modal
+  var modal = $("#myModal");
+
+  var book = $("#book");
+
+  var cross =$("#close");
+
+  
+
+  cross.click(function() {
+    modal.hide();
+    $('body').removeClass('blur')
+    $('modal').removeClass('opaque')
+  })
+
+  $('#book').click(function(){
+    console.log("Submit Button was pressed")
+    
+            $('body').addClass('blur')
+
+            modal.addClass('opaque')
+
+            modal.css("display", "block")
+
+  })
+
 })
 function refresh(){ 
     let total = 0;
@@ -55,15 +85,16 @@ function refresh(){
                     `<td>${key}(X  ${data[key][1]})</td>`,
                     `<td>${(data[key][0]*data[key][1])}</td>`
                 )
+
             )
             i++;
             console.log(i);
             total+=(data[key][0]*data[key][1]);
         })
         if(total>0)
-            $('.bg-text').append(`<h4>Your Total Is :  <b>${total}</b></h4>`);
+            $('.wrapper').append(`<h4>Payable Amount: <b>Rs ${total}</b></h4>`);
         else    
-            $('.bg-text').append('You havent ordered any food yet');
+            $('.wrapper').append('<h3>Cart is empty</h3>');
     });
 };
 

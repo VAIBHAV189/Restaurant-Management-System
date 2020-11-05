@@ -13,15 +13,58 @@
 <body id="body">
     <div class="bg-image"></div>
     <div class="bg-text">
-        <h2>YOUR BILL : </h2>
-        <br><br>
-        <table class="table table-striped" id="mycart">
-            
-        </table>
-        <button type="button" id="backmenu" class="btn btn-success"><a href="../Menu/index.html">Back To Menu</a></button>
-    </div>
+        <div class="wrapper">
+            <h2 class="header">Cart Items</h2>
+            <br><br>
+            <table class="table table-striped" id="mycart">
+                
+            </table>
+        </div>
+        <button type="button" id="book" class="btn btn-success text-light">Confirm Order</button> 
+        <button type="button" id="backmenu" class="btn btn-info text-light"><a href="../Menu/viewMenu.html">Back To Menu</a></button>
 
-    <button id="cart" onclick="refresh();">Show Cart</button>
+    </div>
+    <!-----------------------------------------------------Modal For Confirm Booking----------------------------------------------->
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="close">&times;</button>
+                <h2>Order Confirmation</h2>
+            </div>
+            <div class="modal-body">
+                <label for="modalName" class="column-1">Username</label>
+                <input type="text" class="column" id="modalName" name="username" readonly="true"></input>
+
+                <br>
+
+                <label for="address" class="column-1">Address</label>
+                <textarea name="address" id="address" cols="20" rows="5"></textarea>
+
+                <br>
+
+                
+                <label for="items" class="column-1">Items</label>
+                <textarea name="items" id="items" cols="20" rows="5"></textarea>
+
+                <br>
+
+                <label for="modalTable" class="column-1">Date</label>
+                <input type="date" class="column" id="modalDate"  name="date" readonly="true"></input>
+
+                <br>
+
+                <label for="modalCost" class="column-1">Cost</label>
+                <input type="text" class="column" id="modalCost" name="cost" readonly="true">
+                
+                <br>
+                
+                <button type="submit" id="modalSubmit" class="btn">Confirm Booking</button>
+            </div>
+        </div>
+
+    </div>
+    <button id="cart"  onclick="refresh();">Show Cart</button>
     <script src="jQuery.js"></script>
     <script src="script.js"></script>
 
