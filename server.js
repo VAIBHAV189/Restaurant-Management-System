@@ -1,7 +1,6 @@
 const exp = require('express');
 const server = exp();
 const session = require('express-session');
-const passport = require('./passport');
 
 const root = require('./routes/root.js').route
 const admin = require('./routes/admin').route
@@ -9,11 +8,6 @@ const cart = require('./routes/cart').route
 
 server.use(exp.json());
 server.use(exp.urlencoded({extended:true}));
-
-// server.use(passport.initialize());
-// server.use(passport.session());
-
-
 
 server.use(session({
     secret : 'whyudodis',

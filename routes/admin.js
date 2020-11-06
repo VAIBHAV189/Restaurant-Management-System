@@ -9,9 +9,7 @@ route.use(passport.session());
 
 route.get('/',
     async function(req,res){
-        console.log('helllllooooooooooooooooo')
-        console.log(req.user)
-        if(req.user.jobTitle == 'admin') {
+        if(req.user && req.user.jobTitle == 'admin') {
             const Employee = await employee.findAll( { 
                 order: [
                     ['name','ASC']
@@ -45,7 +43,7 @@ route.get('/addEmployee',(req,res)=>{
 //Employee succesfully added waali cheez kaise??flash message for mployee added
 route.post('/addEmployee',
     async function(req,res) {
-        if(req.user.jobTitle === 'admin') {
+        if(req.user && req.user.jobTitle === 'admin') {
             console.log("Going to addEmployee" + req.body)
             const employeeAdded = await employee.create(req.body)
             console.log("Id of recently added employee: "+  employeeAdded.id)
@@ -55,10 +53,9 @@ route.post('/addEmployee',
     }
 )
 
-route.get('/updateEmployee',(req,res)=>{
-    if(req.user.jobTitle == 'admin') {
-        console.log(req.body)
-        res.render('updateEmployee',req.body)
+route.post('/updateEmployee',(req,res)=>{
+    if(req.user && req.user.jobTitle == 'admin') {
+        res.render('updateEmployee',req.body.Details)
     }
     else res.redirect('/logout') 
 })

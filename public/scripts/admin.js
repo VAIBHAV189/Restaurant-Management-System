@@ -8,6 +8,23 @@ $(()=>{
             phoneNumber: td['3'].innerHTML,
             resAdd: td['4'].innerHTML
         }
-        $.post('/updateEmployee',obj)
+        // $.post('/updateEmployee',obj)
+        let form = $("<form/>",{
+            class: 'form',
+            action: '/admin/updateEmployee',
+            method: 'POST'
+        }).append(
+            $('<input/>',{
+                name: 'Details',
+                value: JSON.stringify(obj),
+                type: 'text' 
+            }),
+            $('<input/>',{
+                class: 'click',
+                type: 'submit'
+            })
+        )
+        $('body').append(form)
+        // $('.click').click()
     })
 })
