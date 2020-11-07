@@ -73,7 +73,7 @@ const salaryEmployee = db.define('Salary_Employee',{
     monthlyHours : {
         type : Sequelize.INTEGER,
         allowNull : false,
-        unique : true
+        unique : false
     }
 }); 
 
@@ -91,7 +91,7 @@ const menu = db.define('Menu',{
     itemPrice : {
         type : Sequelize.INTEGER,
         allowNull : false,
-        unique : true
+        unique : false
     }
 });
 
@@ -123,30 +123,45 @@ const reservationInfo = db.define('Reservation_Info',{
     tableId : {
         type : Sequelize.INTEGER,
         allowNull : false,
-        unique : false,
-        primaryKey: true
     },
     username : {
         type : Sequelize.STRING,
-        allowNull : false,
-        unique: false,
-        primaryKey: true
+        allowNull : false
+    },
+    entryDate:{
+        type:Sequelize.DATEONLY,
+        allowNull: false
     },
     startTime : {
-        type : Sequelize.STRING,
+        type : Sequelize.TIME,
         allowNull : false,
         unique : false,
         primaryKey: true
     },
     endTime : {
-        type : Sequelize.STRING,
+        type : Sequelize.TIME,
         allowNull : false,
         unique : false,
+    },
+    members:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+    }
+});
+
+const tableInfo = db.define('Table_Info',{
+    tableId : {
+        type : Sequelize.INTEGER,
+        autoIncrement:true,
+        primaryKey: true
     },
     members : {
         type : Sequelize.INTEGER,
         allowNull : false,
-        unique : false
+    },
+    cost:{
+        type:Sequelize.INTEGER,
+        allowNull: false,
     }
 });
 
@@ -192,5 +207,6 @@ module.exports = {
     order,
     menu,
     paymentInfo,
-    reservationInfo
+    reservationInfo,
+    tableInfo
 }

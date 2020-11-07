@@ -13,8 +13,6 @@ $(()=>{
             $('#user').show();
             $('#logout').show();
         }
-        else{
-            alert('Please login');
-        }
+       
     });
 })

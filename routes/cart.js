@@ -1,7 +1,11 @@
 const route=require('express').Router()
 const customer=require('../db').customer
 
+const passport = require('../passport');
 
+
+route.use(passport.initialize());
+route.use(passport.session());
 //-----------------------------GET REQUEST FOR FETCHING CART-----------------------------
 route.get('/getcart',(req,res)=>{
     customer.findOne({
