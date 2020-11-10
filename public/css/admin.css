@@ -1,0 +1,50 @@
+/* Vertical NAV CSS Starts */
+.vertical {
+  list-style-type: none;
+  margin-top: 5.5%;
+  width: 15%;
+  background-color: whitesmoke;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  border-right: 3px solid #000;
+  padding-right: 0%;
+  padding-top: 0.5%;
+  padding-left: 0%;
+}
+.vertical img{
+  border-radius: 20%;
+}
+.vertical li{
+  margin-left: 10%;
+}
+.vertical a{
+  display: block;
+  color: rgb(236, 14, 14);
+  border: 0px;
+  background-color: whitesmoke;
+  padding: 8px;
+  font-weight: bolder;
+  text-decoration: none;
+  text-align: center;
+}
+
+.vertical a.active{
+  background-color: #313de9;
+  color: white;
+  border-radius: 50%;
+}
+
+.vertical a:hover:not(.active) {
+  background-color: rgb(60, 63, 236);
+  border-radius: 50%;
+  color: white;
+}
+
+/* Vertical Nav CSS Ends*/
+.afternav {
+  padding-left: 17%;
+  padding-bottom: 3%;
+  padding-top: 6%;
+}
+

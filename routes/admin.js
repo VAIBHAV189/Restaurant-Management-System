@@ -6,6 +6,7 @@ const passport = require('../passport')
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
+const url = require('url')
 
 route.use(passport.initialize());
 route.use(passport.session());
@@ -32,10 +33,12 @@ function removeFile(dir, fileName) {
     })
 }
 
+const sortObject = obj => Object.keys(obj).sort().reduce((res, key) => (res[key] = obj[key], res), {});
+
 route.get('/',
     async function(req,res){
         if(req.user && req.user.jobTitle == 'admin') {
-            const Employee = await employee.findAll( { 
+            let Employee = await employee.findAll( { 
                 order: [
                     ['name','ASC']
                 ]
@@ -46,28 +49,39 @@ route.get('/',
                 if(employeeObj[emp.jobTitle] == undefined) employeeObj[emp.jobTitle] = []
                 employeeObj[emp.jobTitle].push(emp)
             })
-
-            const Menu = await menu.findAll({
+            employeeObj = sortObject(employeeObj)
+            let Menu = await menu.findAll({
                 order: [
                     ['itemType','ASC']
                 ] 
             })
-
             let menuObj = {}
             Menu.forEach(function(item) {
                 if(menuObj[item.itemType] == undefined) menuObj[item.itemType] = []
                 menuObj[item.itemType].push(item)
             })
-            
-            const Salary = await salary.findAll({
+            Menu = sortObject(Menu)
+            let Salary = await salary.findAll({
                 order: [
                     ['jobTitle','ASC']
                 ]
             })
+            let query = req.query
+            if(Object.keys(query).length == 0) {
+                query = {
+                    team: true,
+                    menu: false,
+                    jobs: false,
+                    customers: false,
+                    orders: false
+                }
+            }
+            console.log(query)
             res.render('admin',{
                 employee: employeeObj,
                 menu: menuObj,
-                salary: Salary
+                salary: Salary,
+                hideShow: query
             })
         }
         else res.redirect('/logout')
@@ -116,11 +130,20 @@ route.post('/addEmployee',
                 }
                 else {
                     //can add query parameters to it 
-                    res.redirect('/admin')
+                    res.redirect(url.format({
+                        pathname: '/admin',
+                        query: {
+                            team: true,
+                            menu: false,
+                            jobs: false,
+                            customers: false,
+                            orders: false
+                        }
+                    }))
                 }
             })
         }
-        else res.redirect('logout')
+        else res.redirect('../root/logout')
     }
 )
 
@@ -170,7 +193,16 @@ route.post('/updateEmployee',
                     res.send('Images Only')
                 }
                 else {
-                    res.redirect('/admin')
+                    res.redirect(url.format({
+                        pathname: '/admin',
+                        query: {
+                            team: true,
+                            menu: false,
+                            jobs: false,
+                            customers: false,
+                            orders: false
+                        }
+                    }))
                 }
             })     
         }
@@ -206,7 +238,16 @@ route.post('/removeEmployee',
                     })
                 }
             })
-            res.redirect('/admin')
+            res.redirect(url.format({
+                pathname: '/admin',
+                query: {
+                    team: true,
+                    menu: false,
+                    jobs: false,
+                    customers: false,
+                    orders: false
+                }
+            }))
         }
         else res.redirect('/logout')        
     }
@@ -265,7 +306,16 @@ route.post('/addMenu',
                 }
                 else {
                     //can add query parameters to it 
-                    res.redirect('/admin')
+                    res.redirect(url.format({
+                        pathname: '/admin',
+                        query: {
+                            team: false,
+                            menu: true,
+                            jobs: false,
+                            customers: false,
+                            orders: false
+                        }
+                    }))
                 }
             })
         }
@@ -312,7 +362,16 @@ route.post('/updateMenu',
                     res.send('Images Only')
                 }
                 else {
-                    res.redirect('/admin')
+                    res.redirect(url.format({
+                        pathname: '/admin',
+                        query: {
+                            team: false,
+                            menu: true,
+                            jobs: false,
+                            customers: false,
+                            orders: false
+                        }
+                    }))
                 }
             })
         }
@@ -347,7 +406,16 @@ route.post('/removeMenu',
                     })
                 }
             })
-            res.redirect('/admin')
+            res.redirect(url.format({
+                pathname: '/admin',
+                query: {
+                    team: false,
+                    menu: true,
+                    jobs: false,
+                    customers: false,
+                    orders: false
+                }
+            }))
         }
         else res.redirect('/logout')
     }
@@ -383,7 +451,16 @@ route.post('/updateJob',
                 }
              }
             )
-            res.redirect('/admin')
+            res.redirect(url.format({
+                pathname: '/admin',
+                query: {
+                    team: false,
+                    menu: false,
+                    jobs: true,
+                    customers: false,
+                    orders: false
+                }
+            }))
         }
         else res.redirect('/logout')
     } 
@@ -398,7 +475,16 @@ route.post('/removeJob',
                     jobTitle: req.body.jobTitle
                 }
             })
-            res.redirect('/admin')
+            res.redirect(url.format({
+                pathname: '/admin',
+                query: {
+                    team: false,
+                    menu: false,
+                    jobs: true,
+                    customers: false,
+                    orders: false
+                }
+            }))
         }
         else res.redirect('/logout')
 
