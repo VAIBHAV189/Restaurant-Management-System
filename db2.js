@@ -101,6 +101,7 @@ const order = db.define('Order',{
         allowNull : false,
         unique : false,
         primaryKey: true,
+        autoIncrement : true
     },
     username : {
         type : Sequelize.STRING,
@@ -166,11 +167,6 @@ const tableInfo = db.define('Table_Info',{
 });
 
 const paymentInfo = db.define('Payment_Info',{
-    paymentId : {
-        type : Sequelize.INTEGER,
-        allowNull : false,
-        unique : true
-    },
     orderId : {
         type : Sequelize.INTEGER,
         allowNull : false,

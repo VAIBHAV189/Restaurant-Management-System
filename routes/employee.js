@@ -6,7 +6,7 @@ const multer = require('multer')
 
 route.get('/give/:name',(req,res)=>{
     let file = process.cwd() + '/employee/' + req.params.name
-    console.log(file)
+    // console.log(file)
     res.sendFile(file + '.jpg',function(err) {
         if(err) {
             res.sendFile(file + '.jpeg',function(err) {

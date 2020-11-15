@@ -1,5 +1,7 @@
 const route=require('express').Router()
 const customer=require('../db').customer
+const order = require('../db2').order
+const payment = require('../db2').paymentInfo
 
 const passport = require('../passport');
 
@@ -86,8 +88,49 @@ route.post('/updatecart',function(req,res){
 });
 
 
+//-----------------------------POST REQUEST FOR CONFIRMING CART-----------------------------
+route.post('/confirmcart',(req,res)=>{
+    order.create({
+        username : req.body.username,
+        paymentAmount : req.body.paymentAmount,
+        orderData : req.body.orderData
+    })
+    .then((createdOrder)=>{
+        payment.create({
+            orderId : createdOrder.orderId,
+            paymentDate : req.body.date,
+            paymentAmount : req.body.paymentAmount,
+            orderData : req.body.orderData
+        })
+        .then((paidOrder)=>{
+            add_util(req.body.username,{})
+            res.send('Success')
+        })
+        .catch((err)=>{
+            console.log('Error Occured ' + err)
+            res.send('Failure')
+        })
+    })
+    .catch((err)=>{
+        console.log('Error Occured ' + err)
+        res.send('Failure')
+    })
+})
 
 
+//-----------------------------POST REQUEST FOR GETTING CART HISTORY-----------------------------
+route.get('/history',(req,res)=>{
+    order.findAll({
+        where : {username : req.user.username}
+    })
+    .then((prevOrders)=>{
+        res.send(prevOrders)
+    })
+    .catch((err)=>{
+        console.log("Error Occured : " + err)
+        res.send([])
+    })
+})
 
 
 function add_util(username,n_order)

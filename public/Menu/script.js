@@ -12,7 +12,9 @@ function loginCheck(){
                 $('#logout').show();
                 resolve(data)
             }
-            reject(err)
+            else{
+                reject(err)
+            }
         });
     });
 }
