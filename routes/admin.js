@@ -1,5 +1,7 @@
 const route = require('express').Router()
 const employee = require('../db2').employeeTable
+const customers = require('../db').customer
+const orders = require('../db2').order
 const menu = require('../db2').menu
 const salary = require('../db2').salaryEmployee
 const passport = require('../passport')
@@ -76,10 +78,17 @@ route.get('/',
                     orders: false
                 }
             }
-            console.log(query)
+
+            let users = await customers.findAll({})
+
+            let order = await orders.findAll({})
+
+            // console.log(query)
             res.render('admin',{
+                customers : users,
                 employee: employeeObj,
                 menu: menuObj,
+                orders : order,
                 salary: Salary,
                 hideShow: query
             })
