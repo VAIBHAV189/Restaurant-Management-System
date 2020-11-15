@@ -119,7 +119,7 @@
             </a>
         </li>
     </ul>
-    {{!----------------------------------------------------VERTICAL NAV BAR STARTS ------------------------------------------------}}
+    {{!----------------------------------------------------VERTICAL NAV BAR ENDS ------------------------------------------------}}
 
 
 
@@ -272,8 +272,10 @@
 
         {{#if hideShow.jobs}} <div class="jobs show">  {{else}} <div class="jobs hide">{{/if}}
             {{!--------------------------------------------------------------------- ADD JOBS MODAL-------------------------------------------------------------}}
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addJob">Add Jobs</button>
-
+            <div id="mydiv">
+                    <input type="text" id="filter" onkeyup="filter_users()" placeholder="Search for jobs..">
+                    <button id="add" data-toggle="modal" data-target="#addJob" class="btn btn-primary">ADD</button>
+            </div>
             <div class="modal fade" id="addJob" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -301,12 +303,14 @@
 
 
             {{#if salary}}
-                <table align="center">
+                <table align="center" class="table table-striped table-dark" id="jobs_table">
                     <thead>
                         <tr>
                             <th>Job Title</th>
                             <th>Salary Per Month</th>
                             <th>Monthly Hours</th>
+                            <th>Update</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -315,8 +319,8 @@
                                 <td>{{item.jobTitle}}</td>
                                 <td>{{item.salaryPm}}</td>
                                 <td>{{item.monthlyHours}}</td>
-                                <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateJob"> Update </button> </td>
-                                <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteJob"> Delete </button> </td>
+                                <td> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateJob"> Update </button> </td>
+                                <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteJob"> Delete </button> </td>
                             </tr>
                         {{/each}}
                     </tbody>
@@ -509,6 +513,64 @@
             {{!-----------------------------------------------------------------------------------------------------------------------------------------------}}
 
         </div>
+
+        {{#if hideShow.customers}} <div class="customers show"> {{else}} <div class="customers hide">{{/if}}
+            <div id="customers_div">
+                    <input type="text" id="filter" onkeyup="filter_users()" placeholder="Search for users..">
+            </div>
+            <table id="customers_table" class="table table-striped table-dark">
+                <thead>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email ID</th>
+                </thead>
+            <tbody>
+            {{#each customers as |item| }}
+            <tr>
+                <td>{{item.username}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.email}}</td>
+            </tr>
+
+            {{/each}}
+            </tbody>
+
+            </table>
+            
+        </div>
+
+        {{#if hideShow.orders}} <div class="orders show"> {{else}} <div class="orders hide"> {{/if}}
+
+            <table id="orders_table" class="table table-striped table-dark">
+                <thead>
+                    <th>Order ID</th>
+                    <th>Ordered By</th>
+                    <th>Date & Time</th>
+                    <th>Order Data</th>
+                    <th>Payment Amount</th>
+                </thead>
+                <tbody>
+                    {{#each orders as |item| }}
+                    <tr>
+                        <td>{{item.orderId}}</td>
+                        <td>{{item.username}}</td>
+                        <td>{{item.createdAt}}</td>
+                        <td> 
+                            <ol>
+                            {{#each item.orderData as |khaana|}}
+                                <li>{{@key}} {{khaana}}</li>
+                            {{/each}}
+                            </ol>
+                        </td>
+                        <td>{{item.paymentAmount}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>    
+            
+        </div>
+
+
     </div>
     
     <script src="../scripts/jquery.js"></script>
