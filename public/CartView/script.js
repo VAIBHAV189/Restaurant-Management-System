@@ -36,8 +36,6 @@ function getCurrDate(){
     })
 }
 
-//ue 
-//acha mein ada ka wo progress report likhlun> 5 min bas cart view chal jaye _/\_ok
 $(()=>{
     
     $('#cart').hide()

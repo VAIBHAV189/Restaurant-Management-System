@@ -224,4 +224,7 @@ route.get('/history',(req,res)=>{
     })
 })
 
+
+module.exports={route}
+
 module.exports={route}
