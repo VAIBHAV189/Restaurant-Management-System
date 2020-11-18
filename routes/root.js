@@ -1,5 +1,6 @@
 const route = require('express').Router();
 const customers = require('../db').customer;
+const menu = require('../db2').menu;
 const passport = require('../passport');
 
 // ------------------------------------------Root Authentication Starts------------------------------------------ //
@@ -56,17 +57,29 @@ route.get('/logout', function(req, res){
 
 // //---------------------------------------------------Check login status---------------------------------------//
 route.get('/username',(req,res)=>{
-    
-    let obj ={}
-    if(req.user)
-        obj.username=req.user.username 
+    let obj = {}
+    if(req.user) obj.username = req.user.username 
     res.send(obj);
+})
+
+// // ------------------------------------------------Extract Menu Deatils -----------------------------------//
+
+route.get('/menu',
+    async function(req, res) {
+    Menu = await menu.findAll({})
+    let menuObj = {}
+    Menu.forEach(function(item) {
+        if(menuObj[item.itemType] == undefined) menuObj[item.itemType] = []
+        menuObj[item.itemType].push(item)
+    })
+    res.send(menuObj)
 })
 
 // //--------------------------------------------------Error Page----------------------------------------------//
 route.get("/*",(req,res)=>{
     res.render('errorPage')
 })
+
 
 module.exports = {
     route

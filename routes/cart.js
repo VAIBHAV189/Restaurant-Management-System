@@ -17,7 +17,7 @@ route.get('/getcart',(req,res)=>{
     }).then((val)=>{
         let v = (val.dataValues);
         let n_order = v.currentCartItems;
-        console.log("Sending the cart items ", n_order)
+        // console.log("Sending the cart items ", n_order)
         res.send(n_order);
     });
 });
@@ -40,15 +40,15 @@ route.post('/addcart',function(req,res){
         let n_order = v.currentCartItems;
         if(n_order.hasOwnProperty(name)){
             msg = "Failure";
-            console.log("Sorry,It was an update!");
+            // console.log("Sorry,It was an update!");
             res.send(msg);
         }
         else{
             n_order[name] = [price,times];
-            console.log("Order As Of Now : " + n_order);
+            // console.log("Order As Of Now : " + n_order);
             add_util(req.user.username,n_order);
             msg = "Success";
-            console.log("Addition Done");
+            // console.log("Addition Done");
             res.send(msg);
         }
     });
@@ -107,12 +107,10 @@ route.post('/confirmcart',(req,res)=>{
             res.send('Success')
         })
         .catch((err)=>{
-            console.log('Error Occured ' + err)
             res.send('Failure')
         })
     })
     .catch((err)=>{
-        console.log('Error Occured ' + err)
         res.send('Failure')
     })
 })
@@ -127,7 +125,7 @@ route.get('/history',(req,res)=>{
         res.send(prevOrders)
     })
     .catch((err)=>{
-        console.log("Error Occured : " + err)
+        // console.log("Error Occured : " + err)
         res.send([])
     })
 })
@@ -140,7 +138,7 @@ function add_util(username,n_order)
         {where : { username : username} }
     )
     .then(()=>{
-        console.log("Update Done");
+        // console.log("Update Done");
     });
 }
 

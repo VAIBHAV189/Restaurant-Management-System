@@ -62,7 +62,7 @@ route.get('/',
                 if(menuObj[item.itemType] == undefined) menuObj[item.itemType] = []
                 menuObj[item.itemType].push(item)
             })
-            Menu = sortObject(Menu)
+            // Menu = sortObject(Menu)
             let Salary = await salary.findAll({
                 order: [
                     ['jobTitle','ASC']

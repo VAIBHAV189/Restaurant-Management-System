@@ -136,7 +136,7 @@ function refresh(){
             $('.wrapper').append(`<h4>Payable Amount: <b>Rs ${total}</b></h4>`)
         }
         else{
-            console.log("hi 2")
+            $('.wrapper').empty()
             $('.wrapper').append('<h3>Cart is empty</h3>')
         }
     });
