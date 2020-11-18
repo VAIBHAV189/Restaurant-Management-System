@@ -1,9 +1,11 @@
 const route = require('express').Router()
-
+const fs = require('fs')
 // // ------------------------------------------- For sending food images ----------------------------// //
 
 route.get('/give/:name',(req,res)=>{
-    let fileName = process.cwd() + '/food/' + req.params.name
+    let fileName = req.params.name
+    let dir = './food'
+    let f
     fs.readdirSync(dir).forEach(file => {
         if((fileName+'.jpg' == file)) {
             f = file
@@ -15,7 +17,7 @@ route.get('/give/:name',(req,res)=>{
             f = file
         }
     })
-    res.sendFile(f)
+    res.sendFile(process.cwd() + '/food/' + f)
 })
 
 module.exports = {

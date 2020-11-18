@@ -207,4 +207,24 @@ route.get('/status',function(req,res){
     });
     
 })
+
+
+route.get('/history',(req,res)=>{
+    reservationInfo.findAll({
+        where : {
+            username : req.user.username
+        }
+    }).
+    then((prevReservations)=>{
+        res.send(prevReservations)
+    })
+    .catch((err)=>{
+        console.log("Error Occured" + err)
+        res.send([])
+    })
+})
+
+
+module.exports={route}
+
 module.exports={route}

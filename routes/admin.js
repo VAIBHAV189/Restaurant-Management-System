@@ -1,5 +1,7 @@
 const route = require('express').Router()
 const employee = require('../db2').employeeTable
+const customers = require('../db').customer
+const orders = require('../db2').order
 const menu = require('../db2').menu
 const salary = require('../db2').salaryEmployee
 const passport = require('../passport')
@@ -37,7 +39,7 @@ const sortObject = obj => Object.keys(obj).sort().reduce((res, key) => (res[key]
 
 route.get('/',
     async function(req,res){
-        if(req.user && req.user.jobTitle == 'admin') {
+        if(req.user && req.user.jobTitle == 'Admin') {
             let Employee = await employee.findAll( { 
                 order: [
                     ['name','ASC']
@@ -67,7 +69,7 @@ route.get('/',
                 ]
             })
             let query = req.query
-            if(Object.keys(query).length == 0) {
+            if(Object.keys(query).length == false) {
                 query = {
                     team: true,
                     menu: false,
@@ -76,13 +78,28 @@ route.get('/',
                     orders: false
                 }
             }
-            console.log(query)
-            res.render('admin',{
+
+            let users = await customers.findAll({})
+            let order = await orders.findAll({})
+
+            if(typeof(query.team) == 'string') {
+                console.log('here')
+                for(let node in query) {
+                    query[node] = (query[node] == 'true')
+                }
+            }
+            let newObj = {
+                id: req.user.id,
+                name: req.user.name,
+                customers : users,
                 employee: employeeObj,
                 menu: menuObj,
+                orders : order,
                 salary: Salary,
                 hideShow: query
-            })
+            }
+
+            res.render('admin',newObj)
         }
         else res.redirect('/logout')
 })
@@ -123,7 +140,7 @@ const uploadEmp = multer({
 
 route.post('/addEmployee',
     async function(req,res) {
-        if(req.user && req.user.jobTitle === 'admin') {
+        if(req.user && req.user.jobTitle === 'Admin') {
             uploadEmp(req, res, (err)=>{
                 if(err) {
                     res.send('Images only')
@@ -179,7 +196,7 @@ const reuploadEmp = multer({
 
 route.post('/updateEmployee',
     async function(req, res) {
-        if(req.user.jobTitle == 'admin') {
+        if(req.user.jobTitle == 'Admin') {
             reuploadEmp(req, res, async function(err) {
                 if(req.file) {}
                 else {
@@ -207,14 +224,13 @@ route.post('/updateEmployee',
             })     
         }
         else res.redirect('/logout')
-        
     } 
 )
 
 route.post('/removeEmployee',
     async function(req,res) {
-        if(req.user && req.user.jobTitle == 'admin') {
-            console.log("Going to deleteEmployee" + req.body)
+        if(req.user && req.user.jobTitle == 'Admin') {
+            console.log("Going to deleteEmployee" , req.body)
             const deleteEmployee = employee.destroy({
                 where: {
                     id: req.body.id
@@ -255,7 +271,7 @@ route.post('/removeEmployee',
 //Incomplete
 route.post('/findEmployee',
     async function(req,res) {
-        if(req.user && req.user.jobTitle == 'admin') {
+        if(req.user && req.user.jobTitle == 'Admin') {
             console.log("FindingEmployee" , req.body)
         }
         else res.redirect('/logout')
@@ -298,7 +314,7 @@ const upload = multer({
 
 route.post('/addMenu', 
     async function(req,res) {
-        if(req.user && req.user.jobTitle == 'admin') {
+        if(req.user && req.user.jobTitle == 'Admin') {
             
             upload(req, res, (err)=>{
                 if(err) {
@@ -348,7 +364,7 @@ const reupload = multer({
 
 route.post('/updateMenu',
     async function(req, res) { 
-        if(req.user && req.user.jobTitle == 'admin') {
+        if(req.user && req.user.jobTitle == 'Admin') {
             reupload(req, res, async function(err){
                 if(req.file) {}
                 else {
@@ -381,7 +397,7 @@ route.post('/updateMenu',
 
 route.post('/removeMenu',
     async function(req,res) {
-        if(req.user && req.user.jobTitle == 'admin') {
+        if(req.user && req.user.jobTitle == 'Admin') {
             console.log("Going to removeItem" , req.body)
             const deletedItem = menu.destroy({
                 where: {
@@ -424,7 +440,7 @@ route.post('/removeMenu',
 
 // //---------------------------------------------------CRUD Jobs-----------------------------------------------//
 route.get('/addJob',(req,res)=>{
-    if(req.user && req.user.jobTitle == 'admin') {
+    if(req.user && req.user.jobTitle == 'Admin') {
         res.render("addJob")
     }
     else res.redirect('/logout')
@@ -432,7 +448,7 @@ route.get('/addJob',(req,res)=>{
 
 route.post('/addJob', 
     async function(req,res) {
-        if(req.user && req.user.jobTitle == 'admin') {
+        if(req.user && req.user.jobTitle == 'Admin') {
             console.log(req.body)
             const jobAdded = await salary.create(req.body)
             res.redirect('/admin')
@@ -443,7 +459,7 @@ route.post('/addJob',
 
 route.post('/updateJob',
     async function(req, res) {
-        if(req.user && req.user.jobTitle == 'admin') {
+        if(req.user && req.user.jobTitle == 'Admin') {
             console.log("Going to updateJob" + req.body)
             const itemUpdated = await salary.update(req.body, {
                 where : {
@@ -468,7 +484,7 @@ route.post('/updateJob',
 
 route.post('/removeJob',
     async function(req,res) {
-        if(req.user && req.user.jobTitle == 'admin') {
+        if(req.user && req.user.jobTitle == 'Admin') {
             console.log("Going to removeJob" + req.body)
             const deletedJob = salary.destroy({
                 where: {

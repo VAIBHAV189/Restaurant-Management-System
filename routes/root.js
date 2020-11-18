@@ -16,7 +16,7 @@ route.post('/login/user',passport.authenticate('local-user-login',{
     })
     ,function(req,res){
         console.log("Logging In User: ")
-        console.log(req.user)
+        // console.log(req.user)
         return res.redirect('/')
     }
 );
@@ -25,11 +25,8 @@ route.post('/login/employee',passport.authenticate('local-employee-login',{
         failureRedirect : '/root/login'
     })
     ,function(req,res){
-        console.log("Logging In Employee: ")
-        console.log(req.user)
-        if(req.user.jobTitle == 'admin') 
-            return res.redirect('/admin')
-        else return res.redirect('/employee') 
+        if(req.user.jobTitle === 'Admin') return res.redirect('/admin')
+        else return res.redirect('/employee')
 });
 
 route.get('/signUp',(req,res)=>{
