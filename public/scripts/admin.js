@@ -31,6 +31,35 @@ $(()=>{
         $('.show').show()
         $('.hide').hide()
     })
+
+
+  $('.updateEmp').click(function() {
+      let empId = $(this).siblings('.empId').html()
+      let empPhoneNumber = $(this).siblings('.empPhoneNumber').html()
+      let empResAdd = $(this).siblings('.empResAdd').html()
+      let empName = $(this).parent().siblings().children('.empName').html()
+      let empJobTitle = $(this).parent().parent().siblings('empJobTitle').html()
+
+      $('#updateShowEmpId').text(empId)
+      $('#updateEmpId').val(empId)
+      $('#updateEmpName').val(empName)
+      $('#updateEmpPhoneNumber').val(empPhoneNumber)
+      $('#updateEmpResAdd').val(empResAdd)
+      let obj = $('#updateJobTitle').children()
+      console.log(obj)
+      for(let node in obj) {
+        console.log(node)
+        console.log(obj[node])
+        if(obj[node].innerText == empJobTitle) obj[node].setAttribute('selected')
+      }
+  })
+  $('.deleteEmp').click(function() {
+      let empId = $(this).siblings('.empId').html()
+      let empName = $(this).parent().siblings().children('.empName').html()
+      $('#deleteShowEmpId').text(empId)
+      $('#deleteShowEmpName').text(empName)
+
+  })
 })
 
 function filter_users() {

@@ -164,5 +164,15 @@ function refresh(){
 $(()=>{
     $('#oh').hide()
     $('#rh').hide()
-    refresh()
+    $.get('/root/username',(data)=>{
+        console.log(data.username);
+        if(data.username){
+            refresh()
+        }
+        else{
+            alert("You have not logged in....Redirecting to home page")
+            document.location='/'
+        }
+        
+    });
 })

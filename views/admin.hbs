@@ -20,7 +20,7 @@
     {{!-- // --------------------------------------------- Restaurant Logo & Name ------------------------------------------------- // --}}
             <ul class="navbar-brand navbar-nav mr-auto">
                 <a  class="navbar-brand" href="/">
-                    <img src="Images/Logo.png" style="height:10em">
+                    <img src="Images/Logo.png" style="height:7em">
                 </a>
             </ul>
 
@@ -41,9 +41,9 @@
             </ul>
     {{!---------------------------------------------------UserName----------------------------------------------- --}}
         <a  class="nav-link xyz" href="/">
-            <img id="addEmpImage" style="height:10em" src="Images/Logo.png"> {{!-- add image here --}}
+            <img id="addEmpImage" style="height: 2em; border-radius: 50%" src="employee/give/{{id}}">
+            {{name}}
         </a>
-        
 
         <ul class="navbar-nav">
 
@@ -75,51 +75,73 @@
     <ul class="vertical">
         <li>
             {{#if hideShow.team}}
-            <a class="active" id="one">
+            <a id="one" href="#" class="active">
             {{else}}
-            <a id="one">
+            <a id="one" href="#">
             {{/if}}
                 TEAM <img src="./Images/team.png" height="30">
             </a>
         </li>
         <li>
             {{#if hideShow.menu}}
-            <a class="active" id="two">
+            <a id="two" class="active" href="#">
             {{else}}
-            <a id="two">
+            <a id="two" href="#">
             {{/if}}
                 MENU <img src="./Images/menu.png" height="30">
             </a>
         </li>
         <li>
             {{#if hideShow.jobs}}
-            <a class="active" id="three">
+            <a id="three" href="#" class="active">
             {{else}}
-            <a id="three">
+            <a id="three" href="#">
             {{/if}}           
                 JOBS <img src="./Images/cook.png" height="30">
             </a>
         </li>
         <li>
             {{#if hideShow.customers}}
-            <a class="active" id="four">
+            <a id="four" class="active" href="#">
             {{else}}
-            <a id="four">
+            <a id="four" href="#">
             {{/if}}
                 CUSTOMERS <img src="./Images/customers.png" height="30">
             </a>
         </li>
         <li>
             {{#if hideShow.orders}}
-            <a class="active" id="five">
+            <a id="five" class="active" href="#">
             {{else}}
-            <a id="five">
+            <a id="five" href="#">
             {{/if}}
                 ORDERS <img src="./Images/orders.png" height="30">
             </a>
         </li>
     </ul>
     {{!----------------------------------------------------VERTICAL NAV BAR ENDS ------------------------------------------------}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -155,7 +177,7 @@
                             </select>
                         {{/if}}
                         <input type="text" name="name" placeholder="Name" required>
-                        <input type="tel" name="phoneNumber" placeholder="Contact Number" pattern="[0-9]{10}" required>
+                        <input type="tel" name="phoneNumber" placeholder="Contact Number" required>
                         <input type="text" name="resAdd" placeholder="Address" required> <br>
                         <input type="password" name="password" placeholder="password" required>  <br>
                         <input type="file" name="empImage" required>
@@ -176,21 +198,21 @@
 
             {{#if employee}}
                     {{#each employee as |jobs|}}
-                        <h1>{{@key}}</h1>
+                        <h1><span class="empJobTitle">{{@key}}</h1>
                         <div class="row" style="margin: auto;">
                         {{#each jobs as |emp|}}
                             <div class="col-sm-3 d-flex justify-content-center">
                             <div class="card" style="width: 18rem">
                             <img class="card-img-top" src="/employee/give/{{emp.dataValues.id}}" alt="Card image cap" height="200">
                             <div class="card-body">
-                                <h5 class="card-title">{{emp.dataValues.name}}</h5>
+                                <h5 class="card-title"><span class="empName">{{emp.dataValues.name}}</span></h5>
                                 <p class="card-text">
                                     <strong>{{emp.dataValues.jobTitle}}, Food Buff</strong> <br>
-                                    Employee ID : {{emp.dataValues.id}} <br>
-                                    Contact Info: {{emp.dataValues.phoneNumber}} <br>
-                                    Lives At: {{emp.dataValues.resAdd}} <br>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateEmployee"> Update </button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteEmployee"> Delete </button> 
+                                    Employee ID : <span class="empId">{{emp.dataValues.id}}</span> <br>
+                                    Contact Info: <span class="empPhoneNumber"> {{emp.dataValues.phoneNumber}} </span> <br>
+                                    Lives At: <span class="empResAdd"> {{emp.dataValues.resAdd}} </span> <br> <br>
+                                    <button type="button" class="btn btn-primary updateEmp" data-toggle="modal" data-target="#updateEmployee"> Update </button>
+                                    <button type="button" class="btn btn-primary deleteEmp" data-toggle="modal" data-target="#deleteEmployee"> Delete </button> 
                                 </p>
                             </div>
                             </div>
@@ -205,7 +227,6 @@
 
             {{!-------------------------------------------------------- MODAL FOR UPDATE EMPLOYEE --------------------------------------------------}}
 
-            <!-- Modal -->
             <div class="modal fade" id="updateEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -217,12 +238,20 @@
                 </div>
                 <div class="modal-body">
                     <form action="/admin/updateEmployee" method="POST" enctype="multipart/form-data">
-                        <input type="text" name="jobTitle" placeholder="Job Title" required> <br>
-                        <input type="number" name="id" placeholder="Employee Id" required>
-                        <input type="text" name="name" placeholder="Name" required>
-                        <input type="tel" name="phoneNumber" placeholder="Contact Number" pattern="[0-9]{10}" required>
-                        <input type="text" name="resAdd" placeholder="Address" required> 
-                        <input type="file" name="empImage">
+                        <strong>Employee Id: </strong><span id="updateShowEmpId"></span> <br>
+                        {{#if salary}}
+                            <select name="jobTitle" id="updateJobTitle" required>   {{!-- selected--}}
+                                {{#each salary as |item|}}
+                                    <option value="{{item.jobTitle}}">{{item.jobTitle}}</option>
+                                {{/each}}
+                                <option value="1" selected>hehe</option>
+                            </select>
+                        {{/if}}
+                        <input type="number" name="id" placeholder="Employee Id" id="updateEmpId" hidden required>
+                        <input type="text" name="name" placeholder="Name" id="updateEmpName" required>
+                        <input type="tel" name="phoneNumber" placeholder="Contact Number" id="updateEmpPhoneNumber" required>
+                        <input type="text" name="resAdd" placeholder="Address" id="updateEmpResAdd" required> 
+                        <input type="file" name="empImage"> <br>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </form>
                 </div>
@@ -246,7 +275,8 @@
                     </div>
                     <div class="modal-body">
                         <form action="/admin/removeEmployee" method="POST"> 
-                            Are U sure that u want to <strong>FIRE ?</strong>
+                            Are U sure that u want to <strong>FIRE</strong>
+                            <strong><span id="deleteShowEmpId"></span>: <span id="deleteShowEmpName"></span></strong>
                             <br>
                             <input type="text" name="id" placeholder="Enter EmpID to confirm" required>
                             <button type="submit">DELETE</button>

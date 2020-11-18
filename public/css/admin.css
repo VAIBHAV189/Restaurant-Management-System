@@ -10,17 +10,18 @@ input, select{
 /* Vertical NAV CSS Starts */
 .vertical {
   list-style-type: none;
-  margin-top: 5.5%;
+  margin-top: 6%;
   width: 15%;
   background-color: whitesmoke;
   position: fixed;
-  height: 100%;
+  height:95%;
   overflow: auto;
   border-right: 3px solid #000;
   padding-right: 0%;
   padding-top: 0.5%;
   padding-left: 0%;
 }
+
 .vertical img{
   border-radius: 20%;
 }
@@ -51,6 +52,8 @@ input, select{
 }
 
 /* Vertical Nav CSS Ends*/
+
+
 .afternav {
   padding-left: 17%;
   padding-bottom: 3%;

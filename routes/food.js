@@ -1,37 +1,23 @@
 const route = require('express').Router()
-const menu = require('../db2').menu
+const fs = require('fs')
 // // ------------------------------------------- For sending food images ----------------------------// //
 
 route.get('/give/:name',(req,res)=>{
-    let file = process.cwd() + '/food/' + req.params.name
-    res.sendFile(file + '.jpg',function(err) {
-        if(err) {
-            res.sendFile(file + '.jpeg',function(err) {
-                if(err) {
-                    res.sendFile(file + '.png',function(err){
-                        console.log(err)
-                        res.send("no file named" + req.params.name + " found")
-                    })
-                }
-            })
+    let fileName = req.params.name
+    let dir = './food'
+    let f
+    fs.readdirSync(dir).forEach(file => {
+        if((fileName+'.jpg' == file)) {
+            f = file
+        }
+        else if(fileName+'.jpeg' == file) {
+            f = file
+        }
+        else if(fileName + '.png' == file) {
+            f = file
         }
     })
-})
-
-route.get('/fetch',(req,res)=>{
-//    let Menu = menu.findAll({})
-   menu.findAll({
-        order: [
-            ['itemType','ASC']
-        ] 
-    }).then((Menu)=>{
-        let menuObj = {}
-        Menu.forEach(function(item) {
-            if(menuObj[item.itemType] == undefined) menuObj[item.itemType] = []
-            menuObj[item.itemType].push(item)
-        })
-        res.send(menuObj)
-    })
+    res.sendFile(process.cwd() + '/food/' + f)
 })
 
 module.exports = {
