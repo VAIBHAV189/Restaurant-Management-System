@@ -4,7 +4,7 @@ function loginCheck(){
         $.get('/root/username',(data)=>{
             console.log(data.username);
             if(data.username){
-                console.log("Here");
+                // console.log("Here");
                 $('#login').hide()
                 $('#signUp').hide()
                 $('#user').html("Welcome, " + data.username.toUpperCase())
@@ -37,13 +37,15 @@ function loginCheck(){
 // });
 $(()=>{
 
+    refresh()
+
     $('#logout').hide()
     $('#user').hide()
 
     $.get('/root/username',(data)=>{
-        console.log(data.username);
+        // console.log(data.username);
         if(data.username){
-            console.log("Here");
+            // console.log("Here");
             $('#login').hide()
             $('#signUp').hide()
             $('#user').html("Welcome, " + data.username.toUpperCase())
@@ -65,22 +67,22 @@ $('.add').on('click',function(){
     };
     let res = false;
     loginCheck().then(function(user){
-        console.log("Adding  "+ obj.name + " to " + user.username);
+        // console.log("Adding  "+ obj.name + " to " + user.username);
         res = true;
         $.post('/cart/addcart',obj,(data)=>{
             if(data == 'Success'){
-                console.log('Yass!!');
+                // console.log('Yass!!');
             }
             else{
-                console.log('Msg was Failure');
+                // console.log('Msg was Failure');
                 let obj_new = {
                     name : obj.name,
                     price : obj.price,
                     work : 'inc'
                 }
                 $.post('/cart/updatecart',obj_new,(data)=>{
-                    if(data == 'Success')
-                        console.log('Update Successfull');
+                    // if(data == 'Success')
+                    //     console.log('Update Successfull');
                 })
             }
         });
@@ -94,17 +96,14 @@ $('.add').on('click',function(){
 $('.dec').on('click',function(){
     let v = $(this).parent().children('.update').text();
     v--;
-    console.log(v);
+    // console.log(v);
     $(this).parent().children('.update').text(v);
     let obj = {
         name : ($(this).parent()).siblings('.name').children().text(),
         price : +(($(this).parent()).siblings(".price").children().text()),
         work : 'dec'
     };
-    $.post('/cart/updatecart',obj,(data)=>{
-        if(data == 'Success')
-            console.log('Update Successfull');
-    });
+    $.post('/cart/updatecart',obj,(data)=>{});
     if(v == '0'){
         $(this).parent().children('.update').text("1");
         $(this).parent('.cnt').hide();
@@ -115,7 +114,7 @@ $('.dec').on('click',function(){
 $('.inc').on('click',function(){
     let v = $(this).parent().children('.update').text();
     v++;
-    console.log(v);
+    // console.log(v);
     $(this).parent().children('.update').text(v);
     let obj = {
         name : ($(this).parent()).siblings('.name').children().text(),
@@ -123,15 +122,20 @@ $('.inc').on('click',function(){
         work : 'inc'
     };
     $.post('/cart/updatecart',obj,(data)=>{
-        if(data == 'Success')
-            console.log('Update Successfull');
+        // if(data == 'Success')
+        //     console.log('Update Successfull');
     });
 });
 
 $("#logout").on('click',function(){
     $.get("/root/logout",(data)=>{
-        console.log(data);
+        // console.log(data);
     });
 });
 
 
+function refresh(){
+    // $.get('/food/fetch',(data)=>{
+    //     console.log(data)
+    // })
+}

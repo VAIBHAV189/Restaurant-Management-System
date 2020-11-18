@@ -1,5 +1,5 @@
 const route = require('express').Router()
-
+const menu = require('../db2').menu
 // // ------------------------------------------- For sending food images ----------------------------// //
 
 route.get('/give/:name',(req,res)=>{
@@ -15,6 +15,22 @@ route.get('/give/:name',(req,res)=>{
                 }
             })
         }
+    })
+})
+
+route.get('/fetch',(req,res)=>{
+//    let Menu = menu.findAll({})
+   menu.findAll({
+        order: [
+            ['itemType','ASC']
+        ] 
+    }).then((Menu)=>{
+        let menuObj = {}
+        Menu.forEach(function(item) {
+            if(menuObj[item.itemType] == undefined) menuObj[item.itemType] = []
+            menuObj[item.itemType].push(item)
+        })
+        res.send(menuObj)
     })
 })
 

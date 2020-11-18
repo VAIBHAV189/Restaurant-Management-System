@@ -99,24 +99,20 @@ const order = db.define('Order',{
     orderId : {
         type : Sequelize.INTEGER,
         allowNull : false,
-        unique : false,
         primaryKey: true,
         autoIncrement : true
     },
     username : {
         type : Sequelize.STRING,
         allowNull : false,
-        unique: false
     },
     paymentAmount : {
         type : Sequelize.STRING,
         allowNull : false,
-        unique : true
     },
     orderData : {
         type : Sequelize.JSON,
         allowNull : false,
-        unique : false
     }
 });
 
