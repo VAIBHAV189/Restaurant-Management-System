@@ -58,7 +58,43 @@ $(()=>{
       let empName = $(this).parent().siblings().children('.empName').html()
       $('#deleteShowEmpId').text(empId)
       $('#deleteShowEmpName').text(empName)
+      $('#deleteEmpIdCheck').val(empId)
+  })
 
+
+  $('.salaryUpdateJob').click(function() {
+      let jobTitle = $(this).parent().siblings().children('.salaryJobTitle').text()
+      let salaryPm = $(this).parent().siblings().children('.salaryPm').text()
+      let monthlyHours = $(this).parent().siblings().children('.salaryMonthlyHours').text()
+
+      $('#updateShowJobTitle').val(jobTitle)
+      $('#updateShowMonthlyHours').val(monthlyHours)
+      $('#updateShowSalaryPm').val(salaryPm)
+  })
+  $('.salaryDeleteJob').click(function() {
+      let jobTitle = $(this).parent().siblings().children('.salaryJobTitle').text()
+      $('#jobToBeDeleted').text(jobTitle)
+  })
+
+
+  $('.menuUpdateItem').click(function() {
+    let itemId = $(this).parent().siblings('.menuItemId').text()
+    let itemName = $(this).parent().siblings().children('.menuItemName').text()
+    let itemPrice = $(this).siblings().children('.menuItemPrice').text()
+
+    $('#updateShowItemId').text(itemId)
+    $('#updateShowItemName').val(itemName)
+    $('#updateShowItemPrice').val(itemPrice)
+
+    console.log($('#updateShowItemPrice').val())
+
+  })
+  $('.menudeleteItem').click(function() {
+      let itemName = $(this).parent().siblings().children('.menuItemName').text()
+      let itemId = $(this).parent().siblings('.menuItemId').text()
+
+      $('#deleteShowItemName').text(itemName)
+      $('#deleteCheckItemId').val(itemId)
   })
 })
 

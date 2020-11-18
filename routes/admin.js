@@ -231,6 +231,7 @@ route.post('/removeEmployee',
     async function(req,res) {
         if(req.user && req.user.jobTitle == 'Admin') {
             console.log("Going to deleteEmployee" , req.body)
+            if(req.body.id != req.body.idCheck) return ;
             const deleteEmployee = employee.destroy({
                 where: {
                     id: req.body.id
@@ -399,6 +400,7 @@ route.post('/removeMenu',
     async function(req,res) {
         if(req.user && req.user.jobTitle == 'Admin') {
             console.log("Going to removeItem" , req.body)
+            if(req.body.idCheck != req.body.id) return;
             const deletedItem = menu.destroy({
                 where: {
                     id: req.body.id

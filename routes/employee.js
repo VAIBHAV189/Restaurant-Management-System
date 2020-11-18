@@ -7,13 +7,13 @@ route.get('/give/:name',(req,res)=>{
     let dir = './employee'
     let f
     fs.readdirSync(dir).forEach(file => {
-        if((fileName+'.jpg' == file)) {
+        if((fileName+'.jpg' == file) || (fileName + '.JPG' == file)) {
             f = file
         }
-        else if(fileName+'.jpeg' == file) {
+        else if((fileName+'.jpeg' == file) || (fileName + '.JPEG' == file)) {
             f = file
         }
-        else if(fileName + '.png' == file) {
+        else if((fileName + '.png' == file) || (fileName + '.PNG' == file)) {
             f = file
         }
     })

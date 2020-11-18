@@ -244,7 +244,7 @@
                                 {{#each salary as |item|}}
                                     <option value="{{item.jobTitle}}">{{item.jobTitle}}</option>
                                 {{/each}}
-                                <option value="1" selected>hehe</option>
+                                <option selected disabled>Please Select</option>
                             </select>
                         {{/if}}
                         <input type="number" name="id" placeholder="Employee Id" id="updateEmpId" hidden required>
@@ -278,7 +278,8 @@
                             Are U sure that u want to <strong>FIRE</strong>
                             <strong><span id="deleteShowEmpId"></span>: <span id="deleteShowEmpName"></span></strong>
                             <br>
-                            <input type="text" name="id" placeholder="Enter EmpID to confirm" required>
+                            <input type="number" name="id" placeholder="Enter EmpID to confirm" required>
+                            <input type="number" name="idCheck" id="deleteEmpIdCheck" hidden required>
                             <button type="submit">DELETE</button>
                         </form>
                     </div>
@@ -342,11 +343,11 @@
                     <tbody>
                         {{#each salary as |item|}}
                             <tr>
-                                <td>{{item.jobTitle}}</td>
-                                <td>{{item.salaryPm}}</td>
-                                <td>{{item.monthlyHours}}</td>
-                                <td> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateJob"> Update </button> </td>
-                                <td> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteJob"> Delete </button> </td>
+                                <td><span class="salaryJobTitle">{{item.jobTitle}}</span></td>
+                                <td><span class="salaryPm">{{item.salaryPm}}</span></td>
+                                <td><span class="salaryMonthlyHours">{{item.monthlyHours}}</span></td>
+                                <td> <button type="button" class="btn btn-warning salaryUpdateJob" data-toggle="modal" data-target="#updateJob"> Update </button> </td>
+                                <td> <button type="button" class="btn btn-danger salaryDeleteJob" data-toggle="modal" data-target="#deleteJob"> Delete </button> </td>
                             </tr>
                         {{/each}}
                     </tbody>
@@ -369,9 +370,9 @@
                 <div class="modal-body">
                     <h1>Update Job</h1>
                     <form action="/admin/updateJob" method="POST">
-                        <input type="text" name="jobTitle" placeholder="Job Title" required> <br>
-                        <input type="number" name="monthlyHours" placeholder="Monthly Hours" required>
-                        <input type="number" name="salaryPm" placeholder="Salary P/M" required>
+                        <input type="text" name="jobTitle" placeholder="Job Title" id="updateShowJobTitle" required> <br>
+                        <input type="number" name="monthlyHours" placeholder="Monthly Hours" id="updateShowMonthlyHours" required>
+                        <input type="number" name="salaryPm" placeholder="Salary P/M" id="updateShowSalaryPm" required>
                         <input type="submit"> 
                     </form>
                 </div>
@@ -395,7 +396,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/admin/removeJob" method="POST">
-                        <input type="text" name="jobTitle" required> 
+                        {{!-- <input type="text" name="jobTitle" required> <br> --}}
                         Are U sure that u want to delete <span id="jobToBeDeleted"></span> Job
                     <button type="submit">DELETE</button>
 
@@ -437,6 +438,7 @@
                             <option value="Main Course">Main Course</option>
                             <option value="Dessert">Dessert</option>
                             <option value="Drinks">Drinks</option>
+                            <option selected disabled>Please Select</option>
                         </select>
                         <input type="number" name="itemPrice" placeholder="Price" required>
                         <input type="file" name="itemImage" required>
@@ -461,12 +463,12 @@
                             <div class="card" style="width: 18rem">
                                 <img class="card-img-top" src="/food/give/{{item.dataValues.id}}" alt="Card image cap" height="200">
                                 <div class="card-body">
-                                    Item Id : {{item.dataValues.id}} <br>
-                                    <h5 class="card-title"> {{item.dataValues.itemName}}</h5>
+                                    Item Id : <span class="menuItemId">{{item.dataValues.id}}</span> <br>
+                                    <h5 class="card-title"> <span class="menuItemName">{{item.dataValues.itemName}}</span></h5>
                                     <p class="card-text">
-                                        Cost: <strong>Rs {{item.dataValues.itemPrice}}</strong> <br> <br>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateMenu"> Update </button>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteMenu"> Delete </button>
+                                        Cost: <strong>Rs <span class="menuItemPrice">{{item.dataValues.itemPrice}}</span></strong> <br> <br>
+                                        <button type="button" class="btn btn-primary menuUpdateItem" data-toggle="modal" data-target="#updateMenu"> Update </button>
+                                        <button type="button" class="btn btn-primary menuDeleteItem" data-toggle="modal" data-target="#deleteMenu"> Delete </button>
                                     </p>
                                 </div>
                             </div>
@@ -491,15 +493,16 @@
                 </div>
                 <div class="modal-body">
                     <form action="/admin/updateMenu" method="POST" enctype="multipart/form-data">
-                        <input type="number" name="id" placeholder="Item Id" required> <br>
-                        <input type="text" name="itemName" placeholder="Item Name" required> <br>
-                        <select name="itemType">
+                        <strong>Item Id: <span id="updateShowItemId"></span></strong> <br>
+                        <input type="text" name="itemName" placeholder="Item Name" required id="updateShowItemName"> <br>
+                        <select name="itemType" required>
                             <option value="Starters">Starters</option>
                             <option value="Main Course">Main Course</option>
                             <option value="Dessert">Dessert</option>
                             <option value="Drinks">Drinks</option>
+
                         </select>
-                        <input type="number" name="itemPrice" placeholder="Price" required>
+                        <input type="number" name="itemPrice" placeholder="Price" id="updateShowItemPrice" required> hrhr
                         <input type="file" name="itemImage">
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </form>
@@ -524,8 +527,10 @@
                     </div>
                     <div class="modal-body">
                         <form action="/admin/removeMenu" method="POST">
-                            Are U sure that u want to remove from menu!!
-                            <input type="text" name="id" placeholder="Enter Item ID" required> 
+                            Are U sure that u want to remove <span id="deleteShowItemName"></span> from menu!!
+                            <input type="number" name="id" placeholder="Enter Item ID" required> 
+                            <input type="number" name="idCheck" required id="deleteCheckItemId" hidden>
+                            <input type="number">
                         <button class="btn btn-danger" type="submit">DELETE</button>
 
                         </form>
