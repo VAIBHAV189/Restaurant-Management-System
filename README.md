@@ -1,6 +1,6 @@
 # Restaurant Management System 
 ## 1. Services
-![](Images-Readme/1.png)
+![](Images-Readme/1.png|width=10)
 ## 2. Book tables
 ![](Images-Readme/2.1.png)
 ![](Images-Readme/2.2.png)
