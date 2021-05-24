@@ -13,13 +13,13 @@
 ## 5. View Cart
 ![](Images-Readme/5.png)
 ## 6. Add, Update, Delete and View Employees
-![](Images-Readme/6.1.png)
-![](Images-Readme/6.2.png)
+![](Images-Readme/6.1.PNG)
+![](Images-Readme/6.2.PNG)
 ## 7. Add, Update, Delete and View Jobs
-![](Images-Readme/7.png)
+![](Images-Readme/7.PNG)
 ## 8. View all registered customers
-![](Images-Readme/8.png)
+![](Images-Readme/8.PNG)
 ## 9. View all orders by customers
-![](Images-Readme/9.png)
+![](Images-Readme/9.PNG)
 ## 10. View All Payments and Transactions
-![](Images-Readme/10.png)
+![](Images-Readme/10.PNG)
