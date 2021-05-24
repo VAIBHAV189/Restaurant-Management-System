@@ -132,8 +132,7 @@ const reservationInfo = db.define('Reservation_Info',{
     startTime : {
         type : Sequelize.TIME,
         allowNull : false,
-        unique : false,
-        primaryKey: true
+        unique : false
     },
     endTime : {
         type : Sequelize.TIME,

@@ -113,7 +113,7 @@ route.post('/bookTable',function(req,res){
             reservedList.forEach((rtable)=>{
                 if(clash(rtable,startTime,endTime)){
                     if(store[rtable.dataValues.tableId])
-                        store[rtable.dataValues.tableId]=0
+                        store[rtable.dataValues.tableId] = 0
                 }
             })
             console.log("List of Available Table ID's : ");
