@@ -46,6 +46,7 @@ server.get("/*",(req,res)=>{
     res.render('errorPage')
 })
 
-server.listen(6979,()=>{
+const port = process.env.PORT || '6979';
+server.listen(port,()=>{
     console.log('Server started at http://localhost:6979');
 })
