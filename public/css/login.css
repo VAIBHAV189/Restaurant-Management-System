@@ -4,7 +4,9 @@
 body{
 	margin:0;
 	color: #f1f6e4;
-	background:rgb(0 123 255 / 15%);
+	/* background:rgb(0 123 255 / 15%); */
+	background-image: linear-gradient(to right, white, rgb(163, 163, 240));
+	background-size: 110% 110%;
 	font:600 16px/18px 'Open Sans',sans-serif;
 }
 *,:after,:before{box-sizing:border-box}

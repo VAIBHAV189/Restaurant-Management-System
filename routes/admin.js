@@ -369,6 +369,7 @@ route.post('/updateMenu',
             reupload(req, res, async function(err){
                 if(req.file) {}
                 else {
+                    console.log(req.body);
                     const itemUpdated = await menu.update(req.body, {
                         where : {
                             id: req.body.id

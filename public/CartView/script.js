@@ -98,8 +98,22 @@ $(()=>{
     $('#modalSubmit').on('click',()=>{
         $.post('/cart/confirmcart',obj,(data)=>{
             if(data=='Success'){
+                console.log(data)
                 console.log('Order Confirmed');
                 modal.hide();
+                // let auth_key = "xczHw6MdR4gAFjVGfei3lbpahOTvuQyCUDsZK7SWBo2q9E58nLfYjiktsDxLeXRNHMpIuGq34ACOKdWw"
+
+                // var settings = {
+                // "async": true,
+                // "crossDomain": true,
+                // "url": "https://www.fast2sms.com/dev/bulk?authorization=" + auth_key + "&sender_id=FSTSMS&message=%0aMr." +New_obj.Name+ "!! Thanks for Ordering from Food Buff %0aYour Order No is: "+New_obj.vehicleNumber+"%0aSlot alloted to you is: " +New_obj.slot_number+" %0aYour security key is: "+New_obj.key+"%0a%0a Use this key to login into our Web/Android app for LIVE MONITORING OF YOUR VEHICLE!!. %0a%0aLink to our Android app : https:Googleplaystore/ParkingSystem/apk %0aLink to our Web portal: https:webPortal/UserLogin.gov &language=english&route=p&numbers=" + New_obj.phoneNumber,
+                // "method": "GET"
+                // }
+                
+                // $.ajax(settings).done(function (response) {
+                //     console.log(response.val());
+                // console.log('Message Sent to Mobile Phone number ' + New_obj.phoneNumber + '!!')
+                // });
                 refresh();
             }
             else{
@@ -116,7 +130,6 @@ function refresh(){
     console.log("Refresh Called")
     $.get('/cart/getcart',(data)=>{
         let total = 0;
-        console.log('print karake dekhte')
         // console.log(data);
         let i = 1;
         Object.keys(data).forEach((key,index)=>{

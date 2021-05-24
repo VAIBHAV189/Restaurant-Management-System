@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Food BuFF</title>
+    <link rel="shortcut icon" href="Images/favicon.PNG" type="image/png">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="./css/nav.css">    
     <link rel="stylesheet" href="./css/admin.css">
 </head>
 <body>
@@ -20,15 +24,15 @@
     {{!-- // --------------------------------------------- Restaurant Logo & Name ------------------------------------------------- // --}}
             <ul class="navbar-brand navbar-nav mr-auto">
                 <a  class="navbar-brand" href="/">
-                    <img src="Images/Logo.png" style="height:7em">
+                    <img src="Images/Logo.png" style="height: 4em">
                 </a>
             </ul>
 
 
-    {{!-- // --------------------------------------------- BUTTONS ------------------------------------------------- // --}}
+    {{!-- // ------------------------------------------------------ BUTTONS ------------------------------------------------------- // --}}
             <ul class="navbar-nav">
 
-    {{!-- // --------------------------------------------- HOME ------------------------------------------------- // --}}
+    {{!-- // ------------------------------------------------------- HOME --------------------------------------------------------- // --}}
                 <li class="nav-item active">
                     <a class="nav-link xyz" id="home" href="/">
                     Home
@@ -39,15 +43,15 @@
                     </a>
                 </li> 
             </ul>
-    {{!---------------------------------------------------UserName----------------------------------------------- --}}
+    {{!------------------------------------------------------------- UserName -------------------------------------------------------- --}}
         <a  class="nav-link xyz" href="/">
-            <img id="addEmpImage" style="height: 2em; border-radius: 50%" src="employee/give/{{id}}">
+            <img id="addEmpImage" style="height: 2em; border-radius: 10%" src="employee/give/{{id}}">
             {{name}}
         </a>
 
         <ul class="navbar-nav">
 
-    {{!-- // --------------------------------------------- LOGOUT ------------------------------------------------- // --}}    
+    {{!-- // -------------------------------------------------------- LOGOUT ------------------------------------------------------- // --}}    
             <li class="nav-item active">
                 <a id="logout" class="nav-link xyz" href="/root/logout">
                     Logout
@@ -63,7 +67,7 @@
         </div>
     </nav>
 
-    {{!-----------------------------------------------------HORIZONTAL NAV BAR ENDS -----------------------------------------------}}
+    {{!--------------------------------------------------------- HORIZONTAL NAV BAR ENDS -------------------------------------------------}}
 
 
 
@@ -71,7 +75,7 @@
 
 
 
-    {{!----------------------------------------------------VERTICAL NAV BAR STARTS ------------------------------------------------}}
+    {{!---------------------------------------------------------- VERTICAL NAV BAR STARTS ------------------------------------------------}}
     <ul class="vertical">
         <li>
             {{#if hideShow.team}}
@@ -147,13 +151,12 @@
 
 
 
-
-    <div class="afternav">
+        <div class="afternav">
         <h1 align="center">Welcome Food Buff Admin</h1> 
         <br> <br>
 
         {{#if hideShow.team}} <div class="employee show">  {{else}} <div class="employee hide">{{/if}}
-            <h3>Your High Powered Team</h3>
+            <h3 style=" font-weight: bold;">Your High Powered Team</h3>
             {{!---------------------------------------------------- ADD IN EMPLOYEE MODAL--------------------------------------------------}}
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmployee">Add Employee</button>
@@ -162,7 +165,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">ADD AN EMPLOYEE</h5>
+                    <h5 class="modal-title exampleModalLongTitle">ADD AN EMPLOYEE</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -182,11 +185,11 @@
                         <input type="password" name="password" placeholder="password" required>  <br>
                         <input type="file" name="empImage" required>
 
-                        <input type="submit">
+                        <button type="submit" class="btn btn-primary">SUBMIT</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                 </div>
                 </div>
             </div>
@@ -198,12 +201,14 @@
 
             {{#if employee}}
                     {{#each employee as |jobs|}}
-                        <h1><span class="empJobTitle">{{@key}}</h1>
+                    <br>
+                        <h1><span class="empJobTitle">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{@key}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</h1>
+                        <br>
                         <div class="row" style="margin: auto;">
                         {{#each jobs as |emp|}}
                             <div class="col-sm-3 d-flex justify-content-center">
                             <div class="card" style="width: 18rem">
-                            <img class="card-img-top" src="/employee/give/{{emp.dataValues.id}}" alt="Card image cap" height="200">
+                            <img class="card-img-top" src="/employee/give/{{emp.dataValues.id}}" alt="Card image cap" height="300">
                             <div class="card-body">
                                 <h5 class="card-title"><span class="empName">{{emp.dataValues.name}}</span></h5>
                                 <p class="card-text">
@@ -212,7 +217,7 @@
                                     Contact Info: <span class="empPhoneNumber"> {{emp.dataValues.phoneNumber}} </span> <br>
                                     Lives At: <span class="empResAdd"> {{emp.dataValues.resAdd}} </span> <br> <br>
                                     <button type="button" class="btn btn-primary updateEmp" data-toggle="modal" data-target="#updateEmployee"> Update </button>
-                                    <button type="button" class="btn btn-primary deleteEmp" data-toggle="modal" data-target="#deleteEmployee"> Delete </button> 
+                                    <button type="button" class="btn btn-danger deleteEmp" data-toggle="modal" data-target="#deleteEmployee"> Delete </button> 
                                 </p>
                             </div>
                             </div>
@@ -231,7 +236,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Update Employee Details</h5>
+                    <h5 class="modal-title" class="exampleModalLongTitle">Update Employee Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -256,7 +261,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                 </div>
                 </div>
             </div>
@@ -268,7 +273,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">FIRE EMPLOYEE</h5>
+                        <h5 class="modal-title" class="exampleModalLongTitle">FIRE EMPLOYEE</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -280,11 +285,11 @@
                             <br>
                             <input type="number" name="id" placeholder="Enter EmpID to confirm" required>
                             <input type="number" name="idCheck" id="deleteEmpIdCheck" hidden required>
-                            <button type="submit">DELETE</button>
+                            <button type="submit" class="btn btn-danger">DELETE</button>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     </div>
                     </div>
                 </div>
@@ -307,7 +312,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">ADD A JOB</h5>
+                    <h5 class="modal-title" class="exampleModalLongTitle">ADD A JOB</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -317,11 +322,11 @@
                         <input type="text" name="jobTitle" placeholder="Job Title" required>
                         <input type="number" name="salaryPm" placeholder="Salary P/M" required>
                         <input type="number" name="monthlyHours" placeholder="monthlyHours" required>
-                        <input type="submit">
+                        <button type="submit" class="btn btn-warning">SUBMIT</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                 </div>
                 </div>
             </div>
@@ -362,7 +367,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">UPDATE JOB DESCRIPTION</h5>
+                    <h5 class="modal-title" class="exampleModalLongTitle">UPDATE JOB DESCRIPTION</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -373,11 +378,11 @@
                         <input type="text" name="jobTitle" placeholder="Job Title" id="updateShowJobTitle" required> <br>
                         <input type="number" name="monthlyHours" placeholder="Monthly Hours" id="updateShowMonthlyHours" required>
                         <input type="number" name="salaryPm" placeholder="Salary P/M" id="updateShowSalaryPm" required>
-                        <input type="submit"> 
+                        <button type="submit" class="btn btn-primary">SUBMIT</button> 
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                 </div>
                 </div>
             </div>
@@ -389,7 +394,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">DELETE A JOB</h5>
+                    <h5 class="modal-title" class="exampleModalLongTitle">DELETE A JOB</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -398,12 +403,12 @@
                     <form action="/admin/removeJob" method="POST">
                         {{!-- <input type="text" name="jobTitle" required> <br> --}}
                         Are U sure that u want to delete <span id="jobToBeDeleted"></span> Job
-                    <button type="submit">DELETE</button>
+                    <button type="submit" class="btn btn-danger">DELETE</button>
 
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                 </div>
                 </div>
             </div>
@@ -425,7 +430,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">ADD FOOD ITEMS</h5>
+                    <h5 class="modal-title" class="exampleModalLongTitle">ADD FOOD ITEMS</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -442,11 +447,11 @@
                         </select>
                         <input type="number" name="itemPrice" placeholder="Price" required>
                         <input type="file" name="itemImage" required>
-                        <input type="submit"> 
+                        <button type="submit" class="btn btn-primary">SUBMIT</button>> 
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                 </div>
                 </div>
             </div>
@@ -456,19 +461,21 @@
 
             {{#if menu}}
                 {{#each menu as |type|}}
-                    <h1>{{@key}}</h1>
+                    <br> <br>
+                    <h1><span class="menuTitle">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{@key}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</h1>
+                    <br> <br>
                     <div class="row" style="margin: auto;">
                     {{#each type as |item|}}
                         <div class="col-sm-3 d-flex justify-content-center">
                             <div class="card" style="width: 18rem">
-                                <img class="card-img-top" src="/food/give/{{item.dataValues.id}}" alt="Card image cap" height="200">
+                                <img class="card-img-top" src="/food/give/{{item.dataValues.id}}" alt="Card image cap" height="250">
                                 <div class="card-body">
                                     Item Id : <span class="menuItemId">{{item.dataValues.id}}</span> <br>
                                     <h5 class="card-title"> <span class="menuItemName">{{item.dataValues.itemName}}</span></h5>
                                     <p class="card-text">
                                         Cost: <strong>Rs <span class="menuItemPrice">{{item.dataValues.itemPrice}}</span></strong> <br> <br>
                                         <button type="button" class="btn btn-primary menuUpdateItem" data-toggle="modal" data-target="#updateMenu"> Update </button>
-                                        <button type="button" class="btn btn-primary menuDeleteItem" data-toggle="modal" data-target="#deleteMenu"> Delete </button>
+                                        <button type="button" class="btn btn-danger menuDeleteItem" data-toggle="modal" data-target="#deleteMenu"> Delete </button>
                                     </p>
                                 </div>
                             </div>
@@ -486,7 +493,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">UPDATE FOOD ITEM</h5>
+                    <h5 class="modal-title" class="exampleModalLongTitle">UPDATE FOOD ITEM</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -494,13 +501,13 @@
                 <div class="modal-body">
                     <form action="/admin/updateMenu" method="POST" enctype="multipart/form-data">
                         <strong>Item Id: <span id="updateShowItemId"></span></strong> <br>
+                        <input type="text" name="id" id="updatePasteItemId" hidden required>
                         <input type="text" name="itemName" placeholder="Item Name" required id="updateShowItemName"> <br>
                         <select name="itemType" required>
                             <option value="Starters">Starters</option>
                             <option value="Main Course">Main Course</option>
                             <option value="Dessert">Dessert</option>
                             <option value="Drinks">Drinks</option>
-
                         </select>
                         <input type="number" name="itemPrice" placeholder="Price" id="updateShowItemPrice" required>
                         <input type="file" name="itemImage">
@@ -508,7 +515,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                 </div>
                 </div>
             </div>
@@ -520,7 +527,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">DELETE FOOD ITEM</h5>
+                        <h5 class="modal-title" class="exampleModalLongTitle">DELETE FOOD ITEM</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -530,13 +537,11 @@
                             Are U sure that u want to remove <span id="deleteShowItemName"></span> from menu!!
                             <input type="number" name="id" placeholder="Enter Item ID" required> 
                             <input type="number" name="idCheck" required id="deleteCheckItemId" hidden>
-                            <input type="number">
                         <button class="btn btn-danger" type="submit">DELETE</button>
-
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

@@ -82,6 +82,7 @@ $(()=>{
     let itemName = $(this).parent().siblings().children('.menuItemName').text()
     let itemPrice = $(this).siblings().children('.menuItemPrice').text()
 
+    $('#updatePasteItemId').attr("value", itemId)
     $('#updateShowItemId').text(itemId)
     $('#updateShowItemName').val(itemName)
     $('#updateShowItemPrice').val(itemPrice)
@@ -89,7 +90,9 @@ $(()=>{
     console.log($('#updateShowItemPrice').val())
 
   })
-  $('.menudeleteItem').click(function() {
+  $('.menuDeleteItem').click(function() {
+      console.log('sdfghhgfdfsasdfghg')
+      console.log($(this).parent().siblings().children())
       let itemName = $(this).parent().siblings().children('.menuItemName').text()
       let itemId = $(this).parent().siblings('.menuItemId').text()
 
