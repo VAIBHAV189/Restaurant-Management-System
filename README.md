@@ -1,3 +1,17 @@
+[ Food BuFF Website Link ](https://foodbuff-deploy.herokuapp.com/)
+
+To work on the project run:
+```
+git clone https://github.com/VAIBHAV189/Restaurant-Management-System.git
+```
+```
+npm i
+```
+```
+npm run start
+```
+
+Open locahost:6979 on your local browser!!!
 # Restaurant Management System 
 ## 1. Services
 ![](Images-Readme/1.png)
