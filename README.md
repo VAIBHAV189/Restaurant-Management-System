@@ -8,8 +8,8 @@
 ![](Images-Readme/3.1.png)
 ![](Images-Readme/3.2.png)
 ## 4. Signup Sign-In facilities
-![](Images-Readme/4.1.png | width=50)
-![](Images-Readme/4.2.png | width=50)
+![](Images-Readme/4.1.png)
+![](Images-Readme/4.2.png)
 ## 5. View Cart
 ![](Images-Readme/5.png)
 ## 6. Add, Update, Delete and View Employees
